@@ -1,0 +1,31 @@
+<div class="jumbotron">
+  <h1>Empo X</h1><br>
+  <div class="container-fluid">
+    <%= form_tag search_path, method:"get", :class=>"form-inline" do |f| %>
+      <div class ="form-group">
+        <div class='input-group date', id="searchTextField2">
+          <%= text_field_tag :term, params[:term], id:"autocomplete2", placeholder:"Enter a place", class:"form-control"%>
+            <button class="input-group-addon", type="submit", id="search">
+            <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<br>
+
+<h2>On Fire</h2><br>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <% @items.each do |item| %>
+    <div class="responsive">
+      <div class="gallery">
+        <%= link_to image_tag(item.images.first.image.thumb.url), item if item.images.present? %>
+        <div class="desc">RM<%= item.price_per_night %> <%= item.description %> <%= item.place_type %></div>
+      </div>
+    </div>
+   <% end %>
+  </div>
+</div>
+<%= will_paginate @items %>

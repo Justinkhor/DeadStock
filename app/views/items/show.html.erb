@@ -1,0 +1,156 @@
+<% if @errors.present? %>
+<p><% @errors.each do |x| %>
+  <%= x %>
+    <% end %>
+</p>
+<%end%>
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <% @item.images.each_with_index do |i, ind| %>
+          <% if ind == 0 %>
+            <div class="item active">
+              <%= image_tag i.image.url, style:"width: 100%" %>
+              <div class="carousel-caption">
+                <!-- <h4>Bob</h4> -->
+              </div>
+            </div>
+          <% else %>
+            <div class="item">
+              <%= image_tag i.image.url, style:"width: 100%" %>
+              <div class="carousel-caption">
+                <!-- <h4>Alice</h4> -->
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<p>
+  <%= image_tag(@item.user.avatar.thumb.url, :class =>'img-circle') %>
+  <strong>User:</strong>
+  <%= @item.user.name %>
+</p>
+
+<p>
+  <strong>Place type:</strong>
+  <%= @item.place_type %>
+</p>
+
+<p>
+  <strong>Property type:</strong>
+  <%= @item.property_type %>
+</p>
+
+<p>
+  <strong>Room number:</strong>
+  <%= @item.room_number %>
+</p>
+
+<p>
+  <strong>Bed number:</strong>
+  <%= @item.bed_number %>
+</p>
+
+<p>
+  <strong>Guest number:</strong>
+  <%= @item.guest_number %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @item.country %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @item.state %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @item.city %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @item.zipcode %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @item.address %>
+</p>
+
+<p id="ppn">
+  <strong>Price per night:</strong>
+  <%= @item.price_per_night%>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @item.description %>
+</p>
+
+<br><br>
+<% if @item.user_id != current_user.id %>
+				<!-- Bid form -->
+<%= render 'bids/form' %>
+<% else %>
+<h3>Bids:</h3>
+<br>
+<table>
+  <tr>
+    <th>User Name</th>
+    <th>Check In</th>
+    <th>Check Out</th>
+    <th>Number Of Guests</th>
+    <th>Total Price</th>
+    <th>Paid?</th>
+    <th></th>
+  </tr>
+  <% @item.bids.each do |bid| %>
+  <tr>
+
+  <td><%= bid.user.name %></td>
+  <td><%= bid.check_in.strftime('%d %B %Y') %></td>
+  <td><%= bid.check_out.strftime('%d %B %Y') %></td>
+  <td><%= bid.num_of_guests %></td>
+  <td><%= bid.total_price %></td>
+  <td><%= bid.paid %></td>
+  <td><%= link_to "Cancel Bid", bid, method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>
+
+<br>
+
+<% if @item.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_item_path(@item) %> |
+  <%= link_to 'Back', root_path %>
+<% else %>
+  <%= link_to 'Back', root_path %>
+<% end %>

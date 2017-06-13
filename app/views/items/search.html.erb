@@ -1,0 +1,15 @@
+<h1>Search Results:</h1>
+<br>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <% @items.each do |item| %>
+    <div class="responsive">
+      <div class="gallery">
+        <%= link_to image_tag(item.images.first.image.thumb.url), item%>
+        <div class="desc">RM<%= item.price_per_night %> <%= item.description %> <%= item.place_type %></div>
+      </div>
+    </div>
+   <% end %>
+  </div>
+</div>
+<%= will_paginate @items %>
