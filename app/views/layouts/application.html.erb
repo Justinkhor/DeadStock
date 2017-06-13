@@ -1,128 +1,167 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <%= stylesheet_link_tag 'application' %>
 
-    <!-- CSS -->
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
 
-    <title>AirbnbClone</title>
-    <%= csrf_meta_tags %>
+    <!-- Latest compiled and minified JavaScript -->
+    <%= javascript_include_tag 'application' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/jquery.marquee/1.4.0/jquery.marquee.min.js" type="text/javascript"></script>
+    <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1OJ2LVjPpwrxpiT1qQNEzrdo40juTQDk&libraries=places" type="text/javascript"></script>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
   </head>
-
   <body>
-    <nav class="navbar navbar-inverse" role="navigation">
-  		<div class="container-fluid" id="navbar">
-  			<div class="navbar-header">
-  				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
-  					<span class="sr-only">Toggle navigation</span>
-  					<span class="icon-bar"></span>
-  					<span class="icon-bar"></span>
-  					<span class="icon-bar"></span>
-  				</button>
-  				<a class="navbar-brand" href="/">AirBnb Clone</a>
-  			</div>
-  				<ul class="nav navbar-nav navbar-right">
-            <% if signed_in? %>
-            <li>
-              <%= link_to new_item_path(current_user) do %>
-                Become A Host
-              <% end %>
-            </li>
-            <li>
-              <% if current_user.user? %>
-                <%= link_to user_path(current_user), id:"navbar-pic" do %>
-                  <%= image_tag(current_user.avatar.thumb.url, :class =>'img-circle', :id => 'profilepic') if current_user.avatar.url%> <%= current_user.name %>
-                <% end %>
-              <% elsif current_user.moderator? %>
-                <%= link_to user_path(current_user), id:"navbar-pic" do %>
-                <%= image_tag(current_user.avatar.thumb.url, :class =>'img-circle', :id => 'profilepic') if current_user.avatar.url %> Moderator: <%= current_user.name %>
-                <% end %>
-              <% else %>
-                <div class="dropdown">
-                  <%= link_to user_path(current_user), id:"navbar-pic" do %>
-                    <%= image_tag(current_user.avatar.thumb.url, :class =>'img-circle', :id => 'profilepic') if current_user.avatar.url %> SuperAdmin: <%= current_user.name %>
-                  <% end %>
-                  <div id="myDropdown" class="dropdown-content">
-                    <%= link_to 'View all Users', users_path %>
-                    <%= link_to 'View all Items', items_path %>
-                  </div>
-                </div>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to sign_out_path, method: :delete do %>
-                <span class="glyphicon glyphicon-log-out"></span>  Logout
-              <% end %>
-            </li>
-					  <li><a href="/profile/<%= session[:user_id] %>"></a></li>
-              <% else %>
-              <li>
-                <%= link_to sign_up_path do %>
-                  <span class="glyphicon glyphicon-user"></span>  Sign Up
-                <% end %>
-              </li>
-    	        <li>
-                <%= link_to sign_in_path do %>
-                  <span class="glyphicon glyphicon-log-in"></span>  Login
-                <% end %>
-              </li>
-                <% end %>
-  				</ul>
-  			</div>
-  		</div>
-  	</nav>
 
-    <p id="notice"><%= notice %></p>
-    <%= yield %>
-    <!-- Footer -->
-    <footer>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-4 footer-about wow fadeInUp">
-            <h3>About Us</h3>
-            <p>Web Developer From Next Academy</p>
-            <p>
-                    <a class="scroll-link" href="#about-us">Learn More</a>
-                  </p>
-                </div>
-          <div class="col-sm-5 footer-contact-info wow fadeInDown">
-            <h3>Contact Info</h3>
-                <p><i class="fa fa-map-marker"></i>Location: Next Academy, Glomac Damansara, TTDI, Kuala Lumpur, Malaysia </p>
-                <p><i class="fa fa-phone"></i> Phone: 012-3456789</p>
-                <p><i class="fa fa-envelope"></i> Email: <a href="mailto:justin@next.com">justin@next.com</a></p>
-                </div>
-            <div class="col-sm-3 footer-social wow fadeInUp">
-                  <h3>We're Social</h3>
-                  <p>
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                  </p>
-            </div>
-          </div>
-        <div class="row">
-            <div class="col-sm-6 footer-copyright">
-                  &copy; AIRBNB CLONE BY JUSTIN
-                </div>
-            <div class="col-sm-6 footer-menu">
-                  <ul>
-                    <li><a class="scroll-link" href="#top-content">Top</a></li>
-          <li><a class="scroll-link" href="#features">Features</a></li>
-          <li><a class="scroll-link" href="#how-it-works">How it works</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Privacy</a></li>
+    <div class="navbar navbar-inverse navbar-fixed-top opaque-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navMain">
+            <span class="glyphicon glyphicon-chevron-right" style="color:white;"></span>
+
+          </button>
+          <a class="navbar-brand" href="#">Empo X</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="">
+            <a href="/sneakers">Sneakers</a>
+          </li>
+          <li>
+            <a href="/watches">Watches</a>
+          </li>
+          <li>
+            <a href="/handbags">Handbags</a>
+          </li>
         </ul>
-            </div>
-          </div>
+        <div class="collapse navbar-collapse" id="navMain">
+          <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="#">Browse</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Contact Us</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </footer>
+    </div>
+
+    <%= yield %>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="marquee">jQuery marquee is the best marquee plugin in the world hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey heyhey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey </div>
+  </nav>
+
   </body>
 </html>
+<p id="notice"><%= notice %></p>
+<!-- Footer -->
+<footer>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 footer-about wow fadeInUp">
+        <h3>About Us</h3>
+        <p>Web Developer From Next Academy</p>
+        <p>
+          <a class="scroll-link" href="#about-us">Learn More</a>
+        </p>
+      </div>
+      <div class="col-sm-5 footer-contact-info wow fadeInDown">
+        <h3>Contact Info</h3>
+        <p>
+          <i class="fa fa-map-marker"></i>Location: Next Academy, Glomac Damansara, TTDI, Kuala Lumpur, Malaysia
+        </p>
+        <p>
+          <i class="fa fa-phone"></i>
+          Phone: 012-3456789</p>
+        <p>
+          <i class="fa fa-envelope"></i>
+          Email:
+          <a href="mailto:justin@next.com">justin@next.com</a>
+        </p>
+      </div>
+      <div class="col-sm-3 footer-social wow fadeInUp">
+        <h3>We're Social</h3>
+        <p>
+          <a href="#">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-instagram"></i>
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 footer-copyright">
+        &copy; AIRBNB CLONE BY JUSTIN
+      </div>
+      <div class="col-sm-6 footer-menu">
+        <ul>
+          <li>
+            <a class="scroll-link" href="#top-content">Top</a>
+          </li>
+          <li>
+            <a class="scroll-link" href="#features">Features</a>
+          </li>
+          <li>
+            <a class="scroll-link" href="#how-it-works">How it works</a>
+          </li>
+          <li>
+            <a href="#">Terms</a>
+          </li>
+          <li>
+            <a href="#">Privacy</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
+
+
+<style>
+.marquee {
+  color: #41ad33;
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+  font-family: proxima-nova,sans-serif;
+  overflow: hidden;
+  border: 1px solid black;
+  background: black;
+}
+</style>
+
+
+
+
+<script>
+$(document).ready(function(){
+
+  $('.marquee').marquee({
+      //speed in milliseconds of the marquee
+      duration: 20000,
+      //gap in pixels between the tickers
+      gap: 50,
+      //time in milliseconds before the marquee will start animating
+      delayBeforeStart: 0,
+      //'left' or 'right'
+      direction: 'left',
+      //true or false - should the marquee be duplicated to show an effect of continues flow
+      duplicated: true
+  });
+
+
+});
+
+</script>

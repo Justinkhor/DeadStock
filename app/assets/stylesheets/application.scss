@@ -14,29 +14,31 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import 'bootstrap-datetimepicker';
 @import "font-awesome";
-@import "gmaps-auto-complete";
 @import "animate";
 @import "media-queries";
 @import "braintree";
-@import "style";
+@import "navbar";
 
+.jumbotron {
+ text-align: center;
+ color: white;
+ background-size: 100%;
+ padding-bottom: 150px;
+ padding-top: 150px;
 
-
-
-.navbar-inverse .navbar-brand {
-  color: #FF5A5F;
-  font-weight: 550;
-  opacity: 0.8;
-  &:hover {
-    color: #FF5A5F;
-    opacity: 1;
-  }
 }
 
-.navbar-nav > li > .dropdown {
-  padding-top: 6px;
-  padding-bottom: 15px;
-  line-height: 20px;
+#jumbo-sneaker {
+ background-image: url("https://static.pexels.com/photos/129833/pexels-photo-129833.jpeg");
+}
+
+#jumbo-watch {
+ background-image: url("https://static.pexels.com/photos/23969/pexels-photo.jpg");
+
+}
+
+#jumbo-handbag {
+  background-image: url("https://s3-ap-southeast-2.amazonaws.com/nlm-common-prod/vogue/media/file_uploads/2/1/2/0/21231-1.jpg");
+  margin-bottom: 200px;
 }

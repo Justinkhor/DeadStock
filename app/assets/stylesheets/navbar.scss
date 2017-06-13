@@ -1,0 +1,62 @@
+
+.banner h1
+{
+  color:white;
+}
+
+
+
+/***********************************************************************
+*  OPAQUE NAVBAR SECTION
+***********************************************************************/
+.opaque-navbar {
+    background-color: rgba(0,0,0,0.0);
+    height: 40px;
+    border-bottom: 0px;
+    transition: background-color .5s ease 0s;
+    color: white;
+}
+
+.opaque-navbar.opaque {
+    background-color: black;
+    color: white;
+    height: 40px;
+    transition: background-color .5s ease 0s;
+}
+
+ul.dropdown-menu {
+    background-color: black;
+}
+
+
+@media (max-width: 992px) {
+  .opaque-navbar {
+    background-color: black;
+    height: 40px;
+    transition: background-color .5s ease 0s;
+}
+
+}
+
+
+.navbar-inverse ul.navbar-nav li a:hover { text-decoration: underline;}
+
+.navbar-inverse .navbar-brand{
+
+  color:white;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color:white;
+}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background: #ccc;
+}
+
+.navbar-inverse {
+  margin-bottom: -20px;
+}

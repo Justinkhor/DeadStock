@@ -12,10 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require cloudinary 
+//= require cloudinary
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
 //= require gmaps-auto-complete
 //= require_tree .
+
+
+$(window).scroll(function() {
+  if($(this).scrollTop() > 50)  /*height in pixels when the navbar becomes non opaque*/
+  {
+      $('.opaque-navbar').addClass('opaque');
+  } else {
+      $('.opaque-navbar').removeClass('opaque');
+  }
+});
