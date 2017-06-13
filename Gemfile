@@ -52,6 +52,7 @@ gem 'sidekiq'
 gem 'searchkick'
 gem 'rails_12factor', group: :production
 gem 'will_paginate'
+gem 'fog'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
