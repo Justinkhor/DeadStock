@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root "static#index"
+  root "sneakers#index"
+  get "/sneakers" => "sneakers#index"
+  get "/watches" => "watches#index"
+  get "/handbags" => "handbags#index"
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   resources :items do
     resources :bids, only: [:create]
