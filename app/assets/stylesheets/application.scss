@@ -42,3 +42,17 @@
 #jumbo-handbag {
   background-image: url("https://s3-ap-southeast-2.amazonaws.com/nlm-common-prod/vogue/media/file_uploads/2/1/2/0/21231-1.jpg");
 }
+
+input[type=text-search] {
+    color: black;
+    width: 500px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 40px 12px ;
+}
