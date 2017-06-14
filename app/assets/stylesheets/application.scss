@@ -23,6 +23,7 @@
 .jumbotron {
  text-align: center;
  color: white;
+ text-shadow: #444 0 1px 1px;
  background-size: 100%;
  padding-bottom: 150px;
  padding-top: 150px;
@@ -40,5 +41,4 @@
 
 #jumbo-handbag {
   background-image: url("https://s3-ap-southeast-2.amazonaws.com/nlm-common-prod/vogue/media/file_uploads/2/1/2/0/21231-1.jpg");
-  margin-bottom: 200px;
 }

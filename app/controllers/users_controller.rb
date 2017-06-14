@@ -67,7 +67,7 @@ class UsersController < Clearance::UsersController
     end
 
     def user_params
-        params.require(:user).permit(:name, :age, :country, :gender, :email, :password, :avatar)
+        params.require(:user).permit(:first_name, :last_name, :username, :age, :gender, :state, :email, :password, :vice)
     end
 
     def superadmin_only
