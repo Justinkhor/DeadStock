@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include Clearance::User
   has_many :authentications, :dependent => :destroy
   has_many :items, :dependent => :destroy
-  has_many :bids, dependent: :destroy
+  has_many :stocks, dependent: :destroy
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

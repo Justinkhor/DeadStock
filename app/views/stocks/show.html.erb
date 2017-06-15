@@ -1,0 +1,51 @@
+<% if @errors.present? %>
+<p><% @errors.each do |x| %>
+  <%= x %>
+    <% end %>
+</p>
+<%end%>
+
+<h1>Stock:</h1>
+
+<br>
+
+<p>
+  <strong>Name:</strong>
+  <%= @stock.item.name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @stock.gender %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @stock.size %>
+</p>
+
+<p>
+  <strong>Resell Price:</strong>
+  <%= @stock.resell_price %>
+</p>
+
+<p>
+  <strong>Closing Date:</strong>
+  <%= @stock.closing_date %>
+</p>
+
+<br><br>
+
+<% if @stock.user_id != current_user.id %>
+<%= link_to "Sell", new_stock_path %>
+				<!-- Bid form -->
+<%= render 'bids/form' %>
+<% end %>
+
+<% if @stock.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_item_stock_path(@item,@stock) %> |
+  <%= link_to 'Back', item_path(@item) %>
+<% else %>
+  <%= link_to 'Back', item_path(@item) %>
+<% end %>
+<br><br>

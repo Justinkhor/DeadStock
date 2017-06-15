@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'images/destroy'
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
@@ -19,9 +18,13 @@ Rails.application.routes.draw do
   get "/watches" => "watches#index"
   get "/handbags" => "handbags#index"
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
   resources :items do
-    resources :bids, only: [:create]
+    resources :stocks do
+      resources :bids, only: [:create]
+    end
   end
+  
   resources :bids, only: [:destroy] do
     resources :braintree, only: [:new, :create]
   end

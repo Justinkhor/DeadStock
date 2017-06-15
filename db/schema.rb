@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613104343) do
+ActiveRecord::Schema.define(version: 20170615071635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,19 +57,28 @@ ActiveRecord::Schema.define(version: 20170613104343) do
   create_table "items", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.string   "gender"
     t.string   "color"
     t.string   "model_number"
     t.string   "category"
     t.string   "brand"
-    t.integer  "size"
     t.integer  "retail_price"
-    t.integer  "resell_price"
-    t.integer  "quantity"
     t.date     "release_date"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "size"
+    t.string   "gender"
+    t.integer  "resell_price"
+    t.date     "closing_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["item_id"], name: "index_stocks_on_item_id", using: :btree
+    t.index ["user_id"], name: "index_stocks_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -82,8 +91,6 @@ ActiveRecord::Schema.define(version: 20170613104343) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "username"
-    t.integer  "age"
-    t.string   "gender"
     t.string   "state"
     t.string   "vice"
     t.integer  "role"
