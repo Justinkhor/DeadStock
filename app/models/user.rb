@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :authentications, :dependent => :destroy
   has_many :items, :dependent => :destroy
   has_many :bids, dependent: :destroy
-  enum role: [:user, :moderator, :superadmin]
+  enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
   def self.create_with_auth_and_hash(authentication, auth_hash)

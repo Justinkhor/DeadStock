@@ -2,23 +2,38 @@
   <h1 class="display-3">Empo X</h1>
   <p class="lead">Buy and sell authentic watches online</p>
 	<br />
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-  </p>
+  <form>
+  <input type="text-search" name="search" placeholder="Search for brand, color etc.">
+  </form>
 </div>
 
-<br />
-<br />
-<br /><br />
-<br />
-<br /><br />
-<br />
-<br /><br />
-<br />
-<br /><br />
-<br />
-<br /><br />
-<br />
-<br /><br />
-<br />
-<br />
+<h1><strong>🔥🔥🔥 Most Popular Items 🔥🔥🔥</strong></h1>
+
+	<div class="content">
+		<!-- content here -->
+		<div class="product-grid product-grid--flexbox">
+			<div class="product-grid__wrapper">
+				<!-- Product list start here -->
+        <% @item.each do |i| %>
+				<!-- Single product -->
+				<div class="product-grid__product-wrapper">
+					<div class="product-grid__product">
+              <% i.images.each do |x| %>
+						<div class="product-grid__img-wrapper">
+
+							<%= image_tag x.image.thumb.url %>
+						</div>
+						<span class="product-grid__title">Product title</span>
+						<span class="product-grid__price">1.399€</span>
+						<div class="product-grid__extend-wrapper">
+							<div class="product-grid__extend">
+								<p class="product-grid__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis velit itaque odit.</p>
+								<span class="product-grid__btn product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i> Add to cart</span>
+								<span class="product-grid__btn product-grid__view"><i class="fa fa-eye"></i> View more</span>
+							</div>
+						</div>
+					</div>
+				</div>
+            <% end %>
+        <% end %>
+				<!-- end Single product -->

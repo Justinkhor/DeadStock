@@ -1,29 +1,13 @@
-<br>
-<% if current_user.avatar.url != nil%>
-<%= image_tag(current_user.avatar.thumb.url, :class =>'img-circle') %>
-<% end %>
-<br><br>
-
-
 <p>
   <strong>Name:</strong>
-  <%= @user.name %>
+  <%= @user.first_name %> <%= @user.last_name %>
 </p>
 
 <p>
-  <strong>Age:</strong>
-  <%= @user.age %>
+  <strong>Username:</strong>
+  <%= @user.username%>
 </p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @user.country %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %>
 
@@ -33,30 +17,12 @@
 <table>
   <tr>
     <th>Item Name</th>
-    <th>Check In</th>
-    <th>Check Out</th>
-    <th>Number Of Guests</th>
-    <th>Total Price</th>
-    <th>Paid?</th>
-    <th></th>
-    <th></th>
   </tr>
 <% @bid.each do |bid| %>
 <tr>
-  <td><%= link_to bid.item.description, bid.item %></td>
-  <td><%= bid.check_in.strftime('%d %B %Y') %></td>
-  <td><%= bid.check_out.strftime('%d %B %Y') %></td>
-  <td><%= bid.num_of_guests %></td>
-  <td><%= bid.total_price %></td>
-  <td><%= bid.paid %></td>
-    <% if bid.paid == false %>
-  <td><%= link_to "Make Payment", new_bid_braintree_path(bid) %></td>
-    <% else %>
-  <td></td>
-    <% end %>
-  <td><%= link_to "Cancel Bid", bid, method: :delete %></td>
-</tr>
+  <td><%= link_to bid.item.name, bid.item %></td>
 <% end %>
+</tr>
 </table>
 
 <br>
