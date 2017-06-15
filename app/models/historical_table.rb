@@ -1,0 +1,6 @@
+class HistoricalTable< ApplicationRecord
+
+
+  
+
+end
