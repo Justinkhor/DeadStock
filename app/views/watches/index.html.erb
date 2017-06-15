@@ -15,6 +15,7 @@
 			<div class="product-grid__wrapper">
 				<!-- Product list start here -->
         <% @item.each do |i| %>
+        <% if i.category == "Watches" %>
 				<!-- Single product -->
 				<div class="product-grid__product-wrapper">
 					<div class="product-grid__product">
@@ -23,11 +24,11 @@
 
 							<%= image_tag x.image.thumb.url %>
 						</div>
-						<span class="product-grid__title">Product title</span>
-						<span class="product-grid__price">1.399€</span>
+						<span class="product-grid__title"><%= i.name %></span>
+						<span class="product-grid__price">RM<%= i.retail_price %></span>
 						<div class="product-grid__extend-wrapper">
 							<div class="product-grid__extend">
-								<p class="product-grid__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis velit itaque odit.</p>
+								<p class="product-grid__description"><%= i.model_number %></p>
 								<span class="product-grid__btn product-grid__add-to-cart"><i class="fa fa-cart-arrow-down"></i> Add to cart</span>
 								<span class="product-grid__btn product-grid__view"><i class="fa fa-eye"></i> View more</span>
 							</div>
@@ -35,5 +36,6 @@
 					</div>
 				</div>
             <% end %>
+        <% end %>
         <% end %>
 				<!-- end Single product -->
