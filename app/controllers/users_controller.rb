@@ -1,7 +1,7 @@
 class UsersController < Clearance::UsersController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_login, only: [:show, :edit, :update, :destroy, :index]
-  before_action :superadmin_only, only: [:index]
+  before_action :admin_only, only: [:index]
   before_action :authorize_check, only: [:update, :destroy]
 
     def new
@@ -28,7 +28,7 @@ class UsersController < Clearance::UsersController
 
     def show
       @bid = current_user.bids
-      # unless current_user.superadmin
+      # unless current_user.admin
         # redirect_to root_path
       # end
     end
@@ -61,17 +61,17 @@ class UsersController < Clearance::UsersController
     end
 
     def authorize_check
-      if @user != current_user && !current_user.superadmin?
+      if @user != current_user && !current_user.admin?
         redirect_to root_path
       end
     end
 
     def user_params
-        params.require(:user).permit(:name, :age, :country, :gender, :email, :password, :avatar)
+        params.require(:user).permit(:first_name, :last_name, :username, :age, :gender, :state, :email, :password, :vice)
     end
 
-    def superadmin_only
-      redirect_to sign_in_path unless current_user.superadmin?
+    def admin_only
+      redirect_to sign_in_path unless current_user.admin?
     end
 
 end

@@ -14,68 +14,63 @@
 
 
   <div class="field">
-    <%= f.label :place_type %>
-    <%= f.text_field :place_type %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :property_type %>
-    <%= f.text_field :property_type %>
+    <%= f.label :gender %>
+    <%= f.text_field :gender %>
   </div>
 
   <div class="field">
-    <%= f.label :room_number %>
-    <%= f.number_field :room_number %>
+    <%= f.label :color %>
+    <%= f.text_field :color %>
   </div>
 
   <div class="field">
-    <%= f.label :bed_number %>
-    <%= f.number_field :bed_number %>
+    <%= f.label :model_number %>
+    <%= f.text_field :model_number %>
   </div>
 
   <div class="field">
-    <%= f.label :guest_number %>
-    <%= f.number_field :guest_number %>
+    <%= f.label :category %>
+    <%= f.text_field :category %>
   </div>
 
   <div class="field">
-    <%= f.label :country %>
-    <%= f.text_field :country %>
+    <%= f.label :brand %>
+    <%= f.text_field :brand %>
   </div>
 
   <div class="field">
-    <%= f.label :state %>
-    <%= f.text_field :state %>
+    <%= f.label :size %>
+    <%= f.number_field :size %>
   </div>
 
   <div class="field">
-    <%= f.label :city %>
-    <%= f.text_field :city %>
+    <%= f.label :retail_price %>
+    <%= f.number_field :retail_price %>
   </div>
 
   <div class="field">
-    <%= f.label :zipcode %>
-    <%= f.number_field :zipcode %>
+    <%= f.label :resell_price %>
+    <%= f.number_field :resell_price %>
   </div>
 
   <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
   </div>
 
   <div class="field">
-    <%= f.label :price_per_night %>
-    <%= f.number_field :price_per_night %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.label :release_date %>
+    <%= f.date_field :release_date %>
   </div>
 <br>
 
 <%= f.fields_for :image do |ff| %>
-    <div class="field" id='uploadavatar'>
+    <div class="field">
       <%= ff.label :image %><br>
       <%= ff.file_field :image, multiple: true, name: "images[]" %>
     </div>

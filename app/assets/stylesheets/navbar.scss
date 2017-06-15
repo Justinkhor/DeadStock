@@ -51,11 +51,28 @@ ul.dropdown-menu {
 }
 
 .marquee {
-  width: 100%;
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background: #ccc;
+color: #41ad33;
+font-size: 18px;
+font-weight: 600;
+width: 150%;
+font-family: proxima-nova,sans-serif;
+overflow: hidden;
+border: 1px solid black;
+background: black;
 }
+
+#item_marquee {
+  color: white;
+}
+
+#number_marquee_down {
+  color: #ff5a5f;
+}
+
+#symbol_marquee_down {
+  color: #ff5a5f;
+}
+
 
 .navbar-inverse {
   margin-bottom: -20px;
