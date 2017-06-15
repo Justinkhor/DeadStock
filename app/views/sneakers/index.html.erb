@@ -15,6 +15,30 @@
         <div class="p-one simpleCart_shelfItem">
             <a href="single.html">
 
+
+<br />
+<br />
+<br /><br />
+<br />
+<br /><br />
+<br />
+<br /><br />
+<br />
+<br /><br />
+<br />
+<br /><br />
+<br />
+<br /><br />
+<br />
+<br />
+
+<% x = HistoricalTable.uniq.pluck(:model_number) %>
+<%= x %>
+
+<% x.each do |modelno| %>
+<%= area_chart HistoricalTable.where(model_number: modelno).group(:date_time).sum(:transacted_price) %>
+<% end %>
+
               <div class="mask">
                 <span>Quick View</span>
               </div>
@@ -70,3 +94,4 @@
 
         </div>
       </div>
+
