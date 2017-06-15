@@ -129,6 +129,7 @@ body {
 	&__price {
 		color: $primary;
 		font-weight: bold;
+		font-size: 20px;
 		letter-spacing: .4px;
 	}
 
@@ -143,7 +144,7 @@ body {
 	&__extend {
 		display: none;
 		position: absolute;
-		padding: 0 1rem 1rem 1rem;
+		padding: 0 4rem 4rem 4rem;
 		margin: .4375rem -1rem 0;
 		box-shadow: $product-box-shadow;
 		background: #fff;

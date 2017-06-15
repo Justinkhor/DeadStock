@@ -1,0 +1,30 @@
+<h1>New Stock</h1>
+<div class="container">
+<%= form_for([@item, @stock]) do |f| %>
+
+  <div class="field">
+    <%= f.label :gender %>
+    <%= f.text_field :gender %>
+  </div>
+
+  <div class="field">
+    <%= f.label :size %>
+    <%= f.number_field :size %>
+  </div>
+
+  <div class="field">
+    <%= f.label :resell_price %>
+    <%= f.number_field :resell_price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :closing_date %>
+    <%= f.date_field :closing_date %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+</div>
