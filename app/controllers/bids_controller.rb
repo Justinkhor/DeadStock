@@ -40,7 +40,7 @@ class BidsController < ApplicationController
 
   private
 		def bid_params
-			params.require(:bid).permit(:check_in, :check_out, :num_of_guests, :item_id, :user_id)
+			params.require(:bid).permit(:bidding_price, :quantity, :item_id, :user_id)
 		end
 
 end

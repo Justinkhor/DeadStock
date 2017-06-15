@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.search(params[:term], fields: ["country", "state", "city", "zipcode", "address", "description"], misspellings: {below: 5}).paginate(:page => params[:page]).per_page(20)
+    @items = Item.search(params[:term], fields: ["name", "brand", "model_number", "color"], misspellings: {below: 5}).paginate(:page => params[:page]).per_page(20)
     if @items.blank?
       redirect_to root_path, flash:{danger: "no successful search result"}
     else
@@ -102,14 +102,14 @@ class ItemsController < ApplicationController
     end
 
     def authorize_check
-      unless @item.user == current_user || current_user.moderator? || current_user.superadmin?
+      unless @item.user == current_user || current_user.admin?
         redirect_to root_path
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:place_type, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :address, :price_per_night, :description, images_attributes: [:image, :item_id])
+      params.require(:item).permit(:name, :gender, :color, :model_number, :category, :brand, :size, :retail_price, :resell_price, :quantity, :release_date, :user_id, images_attributes: [:image, :item_id])
     end
 
     def non_user_only
