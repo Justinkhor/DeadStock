@@ -43,11 +43,13 @@
             <a href="#">About</a>
           </li>
             <% if signed_in? %>
+            <% if current_user.role == "admin" %>
             <li>
               <%= link_to new_item_path(current_user) do %>
-                View Items
+                Add Items
               <% end %>
             </li>
+              <% end %>
             <li>
               <% if current_user.user? %>
                 <%= link_to user_path(current_user), id:"navbar-pic" do %>
@@ -196,7 +198,7 @@
         </div>
       </div>
     </div>
-
+<p id="notice"><%= notice %></p>
     <%= yield %>
 
     <nav class="navbar navbar-inverse navbar-fixed-bottom">
@@ -246,7 +248,7 @@
 
   </body>
 </html>
-<p id="notice"><%= notice %></p>
+
 <!-- Footer -->
 <footer></footer>
 </body>

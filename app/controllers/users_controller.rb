@@ -11,6 +11,7 @@ class UsersController < Clearance::UsersController
 
     def create
         @user = User.new(user_params)
+        byebug
         if @user.save
             sign_in @user
             redirect_back_or url_after_create
@@ -67,7 +68,7 @@ class UsersController < Clearance::UsersController
     end
 
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :username, :age, :gender, :state, :email, :password, :vice)
+        params.require(:user).permit(:first_name, :last_name, :username, :state, :email, :password, :vice)
     end
 
     def admin_only

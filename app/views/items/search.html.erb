@@ -6,7 +6,7 @@
     <div class="responsive">
       <div class="gallery">
         <%= link_to image_tag(item.images.first.image.thumb.url), item%>
-        <div class="desc">RM<%= item.price_per_night %> <%= item.description %> <%= item.place_type %></div>
+        <div class="desc"><%= item.name %></div>
       </div>
     </div>
    <% end %>
