@@ -18,6 +18,8 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require gmaps-auto-complete
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .
 
 
@@ -29,3 +31,7 @@ $(window).scroll(function() {
       $('.opaque-navbar').removeClass('opaque');
   }
 });
+
+
+
+
