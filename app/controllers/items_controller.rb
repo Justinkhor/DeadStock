@@ -67,6 +67,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
+    byebug
     respond_to do |format|
       if @item.update(item_params)
         if params[:images]
@@ -110,7 +111,7 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
 
-      params.require(:item).permit(:name, :model_number, :category, :brand, :retail_price, :release_date, :user_id, images_attributes: [:image, :item_id])
+      params.require(:item).permit(:name, :color, :model_number, :category, :brand, :retail_price, :release_date, :user_id, images_attributes: [:image, :item_id])
 
     end
 
