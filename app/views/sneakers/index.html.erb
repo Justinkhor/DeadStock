@@ -95,9 +95,4 @@
   </div>
 </div>
 
-<% x = HistoricalTable.uniq.pluck(:model_number) %>
-<%= x %>
 
-<% x.each do |modelno| %>
-<%= area_chart HistoricalTable.where(model_number: modelno).group(:date_time).maximum(:transacted_price) %>
-<% end %>
