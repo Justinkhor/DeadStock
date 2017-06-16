@@ -99,5 +99,5 @@
 <%= x %>
 
 <% x.each do |modelno| %>
-<%= area_chart HistoricalTable.where(model_number: modelno).group(:date_time).sum(:transacted_price) %>
+<%= area_chart HistoricalTable.where(model_number: modelno).group(:date_time).maximum(:transacted_price) %>
 <% end %>
