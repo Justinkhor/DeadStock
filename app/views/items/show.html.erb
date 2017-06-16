@@ -24,7 +24,7 @@
       <p>
         LAST SALE
       </p>
-      <a href="#" class="myButton">BUY</a>
+      <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>>
     </div>
     <div class="item-options col-sm-3">
       <p>
@@ -35,7 +35,7 @@
       <p>
         HIGHEST BID
       </p>
-      <a href="#" class="myButton2">SELL</a>
+      <%= button_to "SELL", new_item_stock_path(@item), class:"myButton2", method: "get"%>
     </div>
   </div>
 
@@ -138,7 +138,7 @@
       <td><%= stock.gender %></td>
       <td><%= stock.size %></td>
       <td><%= stock.resell_price %></td>
-      <td><%= stock.closing_date.strftime('%d %B %Y') %></td>
+      <td><%= stock.closing_date %></td>
       <td><%= link_to "Delete", method: :delete %></td>
       </tr>
       <% end %>
@@ -151,4 +151,3 @@
 <% end %>
 <%= link_to 'Back', root_path %>
 <br><br><br>
-

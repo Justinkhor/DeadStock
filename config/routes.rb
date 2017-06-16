@@ -21,10 +21,10 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :stocks do
-      resources :bids, only: [:create]
+      resources :bids, only: [:create, :new]
     end
   end
-  
+
   resources :bids, only: [:destroy] do
     resources :braintree, only: [:new, :create]
   end
