@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :authentications, :dependent => :destroy
   has_many :items, :dependent => :destroy
   has_many :stocks, dependent: :destroy
+  has_many :bids, dependent: :destroy
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

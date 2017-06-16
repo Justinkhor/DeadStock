@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615071635) do
+ActiveRecord::Schema.define(version: 20170616065606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,12 +27,14 @@ ActiveRecord::Schema.define(version: 20170615071635) do
 
   create_table "bids", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "item_id"
+    t.integer  "stock_id"
     t.integer  "bidding_price"
-    t.integer  "quantity"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["item_id"], name: "index_bids_on_item_id", using: :btree
+    t.integer  "size"
+    t.string   "gender"
+    t.string   "closing_date"
+    t.index ["stock_id"], name: "index_bids_on_stock_id", using: :btree
     t.index ["user_id"], name: "index_bids_on_user_id", using: :btree
   end
 
@@ -74,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170615071635) do
     t.integer  "size"
     t.string   "gender"
     t.integer  "resell_price"
-    t.date     "closing_date"
+    t.string   "closing_date"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["item_id"], name: "index_stocks_on_item_id", using: :btree

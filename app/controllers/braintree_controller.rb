@@ -7,7 +7,7 @@ class BraintreeController < ApplicationController
   def create
   @bid = Bid.find(params[:bid_id])
   nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
-  amount_to_be_paid = @bid.total_price
+  amount_to_be_paid = @bid.bidding_price
 
   result = Braintree::Transaction.sale(
    :amount => amount_to_be_paid,
@@ -18,7 +18,6 @@ class BraintreeController < ApplicationController
    )
 
     if result.success?
-      @bid.paid = true
       @bid.save
       redirect_to user_path(current_user), notice: "Transaction successful!"
     else
