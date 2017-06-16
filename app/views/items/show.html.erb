@@ -6,6 +6,7 @@
     </div>
   </div>
 
+
   <div class="item-symbols">
     <p>
       TICKER: <%= @item.model_number %> | CONDITION: DEADSTOCK
@@ -101,10 +102,6 @@
     </tr>
   </table>
 
-
-
-
-
   <br>
 
   <% x = HistoricalTable.uniq.pluck(:model_number) %>
@@ -116,41 +113,42 @@
 
   <br>
 
-  <% if current_user.role != "admin" %>
-  <%= link_to "Sell", new_item_stock_path(@item) %> |
-  <%= link_to 'Back', root_path %>
-  <% else %>
-  <h3>Stocks:</h3>
-  <br>
-  <table>
-    <tr>
-      <th>Id</th>
-      <th>Username</th>
-      <th>Gender</th>
-      <th>Size</th>
-      <th>Resell Price</th>
-      <th>Closing Date</th>
-      <th></th>
-    </tr>
-    <% @item.stocks.each do |stock| %>
-    <tr>
-    <td><%= stock.id %></td>
-    <td><%= stock.user.username %></td>
-    <td><%= stock.gender %></td>
-    <td><%= stock.size %></td>
-    <td><%= stock.resell_price %></td>
-    <td><%= stock.closing_date.strftime('%d %B %Y') %></td>
-    </tr>
-  <% end %>
-  </table>
-
-  <br>
-  <td><%= link_to "Delete Stock", item_stock_path(@item), method: :delete %></td>
-
-    <%= link_to 'Edit', edit_item_path(@item) %> |
-    <%= link_to 'Back', root_path %>
-
-  <% end %>
-  <br><br><br>
-
 </div>
+
+<% if signed_in? %>
+  <% if current_user.role != "admin"%>
+    <%= link_to "Sell", new_item_stock_path(@item) %> |
+  <% else %>
+    <h3>Stocks:</h3>
+    <br>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Gender</th>
+        <th>Size</th>
+        <th>Resell Price</th>
+        <th>Closing Date</th>
+        <th></th>
+      </tr>
+      <% @item.stocks.each do |stock| %>
+      <tr>
+      <td><%= stock.id %></td>
+      <td><%= stock.user.username %></td>
+      <td><%= stock.gender %></td>
+      <td><%= stock.size %></td>
+      <td><%= stock.resell_price %></td>
+      <td><%= stock.closing_date.strftime('%d %B %Y') %></td>
+      <td><%= link_to "Delete", method: :delete %></td>
+      </tr>
+      <% end %>
+    </table>
+    <br>
+
+  <%= link_to 'Edit', edit_item_path(@item) %> |
+
+  <% end %>
+<% end %>
+<%= link_to 'Back', root_path %>
+<br><br><br>
+
