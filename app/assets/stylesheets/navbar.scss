@@ -42,7 +42,6 @@ ul.dropdown-menu {
 .navbar-inverse ul.navbar-nav li a:hover { text-decoration: underline;}
 
 .navbar-inverse .navbar-brand{
-
   color:white;
 }
 
@@ -80,16 +79,21 @@ background: black;
 
 /* Dropdown Button */
 .dropbtn {
-  background-color: white;
+
+  color: white;
     padding: 15px;
     font-size: 15px;
     border: none;
     cursor: pointer;
 }
+.dropdown a:hover { color: white;}
+.dropdown a:active { color: white;}
+.dropdown a:focus { color: white;}
+.dropdown a:visited { color: white;}
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-    position: relative;
+    margin-top: 15px;
     display: inline-block;
 }
 
@@ -97,7 +101,7 @@ background: black;
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: transparent;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;

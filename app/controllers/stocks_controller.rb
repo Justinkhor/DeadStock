@@ -26,7 +26,7 @@ class StocksController < ApplicationController
       if @stock.update(stock_params)
         redirect_to item_stock_path(@item, @stock), notice: "You have successfully edited your stock."
       else
-        redirect_to item_stock_path(@item, @stock), notice: "Failed to create stock."
+        redirect_to item_stock_path(@item, @stock), notice: "Failed to edit stock."
       end
   end
 
@@ -41,7 +41,7 @@ class StocksController < ApplicationController
   def destroy
     @stock = Stock.find(params[:id])
     @stock.destroy
-    redirect_to item_path(@item), notice: "You have successfully deleted a stock."
+    redirect_to item_path(@item), notice: "Stock has been deleted."
   end
 
   private
