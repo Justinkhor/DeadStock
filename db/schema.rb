@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616065606) do
+ActiveRecord::Schema.define(version: 20170616073024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,8 +43,11 @@ ActiveRecord::Schema.define(version: 20170616065606) do
     t.datetime "date_time"
     t.integer  "transacted_price"
     t.integer  "item_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "fx_pair"
+    t.decimal  "fx_rate"
+    t.decimal  "transacted_price_myr"
     t.index ["item_id"], name: "index_historical_tables_on_item_id", using: :btree
   end
 
