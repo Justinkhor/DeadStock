@@ -1,6 +1,6 @@
 class Bid < ApplicationRecord
   belongs_to :user
-  belongs_to :stocks
+  belongs_to :stock
   validate :check_min_bid
 
   def check_min_bid

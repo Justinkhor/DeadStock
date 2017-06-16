@@ -1,6 +1,6 @@
 <div class="demo-frame">
   <br>
-      <p id="notice2">Total Amount : RM<%= @bid.total_price %></p>
+      <p id="notice2">Total Amount : RM<%= @bid.bidding_price %></p>
 
       <%= form_for :checkout_form, url: bid_braintree_index_path, html: { id: "cardForm"} do |form| %>
 
