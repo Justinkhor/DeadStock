@@ -26,7 +26,6 @@ class BidsController < ApplicationController
 		@bid = current_user.bids.new(bid_params)
     @bid.stock_id = @stock.id
     # @bid.item = @item
-    byebug
     if @bid.save
       # @host = User.find(@item.user_id)
       #     # BidMailer.bid_email(current_user, @host, @bid.item.id, @bid.id).deliver_later

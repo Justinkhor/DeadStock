@@ -22,7 +22,7 @@
 
 <div class="field">
   <%= f.label :closing_date %>
-  <%= f.select :closing_date, ['1 Day', '3 Days', '5 Days', '10 Days', '20 Days', '30 Days'] %>
+  <%= f.date_field :closing_date, min: Date.today.strftime('%Y-%m-%d'), max: @stock.closing_date %>
 </div>
 
 <br>
