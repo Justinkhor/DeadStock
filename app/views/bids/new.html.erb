@@ -1,0 +1,47 @@
+<h1> Buy </h1>
+<div class="container">
+<%= form_for([@item, @stock, @bid]) do |f| %>
+<% if @errors.present? %>
+<p><% @errors %></p>
+<%end%>
+
+<div class="field">
+  <%= f.label :gender %>
+  <%= f.select :gender, ['Male', 'Female'] %>
+</div>
+
+<div class="field">
+  <%= f.label :size %>
+  <%= f.select :size, ['6', '7', '8', '9', '10', '11', '12', '13', '14'] %>
+</div>
+
+<div class="field">
+  <%= f.label :bidding_price %>
+  <%= f.number_field :bidding_price %>
+</div>
+
+<div class="field">
+  <%= f.label :closing_date %>
+  <%= f.select :closing_date, ['1 Day', '3 Days', '5 Days', '10 Days', '20 Days', '30 Days'] %>
+</div>
+
+<br>
+<div class="row">
+	<div class="col-md-offset-4 col-md-4">
+		<table class = "bid-table">
+			<tbody>
+				<tr>
+					<td>Bidding Price: </td>
+					<td>0</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+	<br/>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>

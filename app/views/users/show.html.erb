@@ -20,7 +20,7 @@
   </tr>
 <% @bid.each do |bid| %>
 <tr>
-  <td><%= link_to bid.item.name, bid.item %></td>
+  <td><%= link_to bid.stock.item.name, bid.stock.item %></td>
 <% end %>
 </tr>
 </table>

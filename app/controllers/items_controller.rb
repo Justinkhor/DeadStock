@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
   def show
     # @bid = @item.bids.new
     # @errors = @bid.errors.full_messages
-
+    # @stock = @item.stocks.find(stock_params)
   end
 
   # GET /items/new

@@ -4,12 +4,12 @@
 
   <div class="field">
     <%= f.label :gender %>
-    <%= f.text_field :gender %>
+    <%= f.select :gender, ['Male', 'Female'] %>
   </div>
 
   <div class="field">
     <%= f.label :size %>
-    <%= f.number_field :size %>
+    <%= f.select :size, ['6', '7', '8', '9', '10', '11', '12', '13', '14'] %>
   </div>
 
   <div class="field">
@@ -19,7 +19,7 @@
 
   <div class="field">
     <%= f.label :closing_date %>
-    <%= f.date_field :closing_date %>
+    <%= f.select :closing_date, ['1 Day', '3 Days', '5 Days', '10 Days', '20 Days', '30 Days'] %>
   </div>
 
   <div class="actions">
