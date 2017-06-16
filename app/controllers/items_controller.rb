@@ -67,7 +67,6 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    byebug
     respond_to do |format|
       if @item.update(item_params)
         if params[:images]
