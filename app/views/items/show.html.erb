@@ -24,7 +24,14 @@
       <p>
         LAST SALE
       </p>
-      <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>>
+      <% if !@item.stocks.empty? %>
+      <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
+
+      <% else %>
+      <p>
+        SORRY! NO STOCK AVAILABLE AT THIS MOMENT.
+      </p>
+      <% end %>
     </div>
     <div class="item-options col-sm-3">
       <p>
