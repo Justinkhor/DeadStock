@@ -24,6 +24,7 @@
       <p>
         LAST SALE
       </p>
+      <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
       <% if !@item.stocks.empty? %>
       <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
 
@@ -110,13 +111,17 @@
   </table>
 
   <br>
-
+  <table>
+<div class="graph col-sm-4 col-sm-offset-2 col-md-6">
   <% x = HistoricalTable.uniq.pluck(:model_number) %>
-  <%= x %>
 
-  <% x.each do |modelno| %>
-  <%= area_chart HistoricalTable.where(model_number: modelno).group(:date_time).sum(:transacted_price) %>
-  <% end %>
+      <% if x.include?(@item.model_number) %>
+      <%= @item.model_number %>
+        <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr) %>
+      <% end %>
+
+</div>
+</table>
 
   <br>
 
