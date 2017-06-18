@@ -24,7 +24,6 @@
       <p>
         LAST SALE
       </p>
-      <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
       <% if !@item.stocks.empty? %>
       <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
 
@@ -142,6 +141,7 @@
         <th>Resell Price</th>
         <th>Closing Date</th>
         <th></th>
+        <th></th>
       </tr>
       <% @item.stocks.each do |stock| %>
       <tr>
@@ -151,6 +151,7 @@
       <td><%= stock.size %></td>
       <td><%= stock.resell_price %></td>
       <td><%= stock.closing_date %></td>
+      <td><%= link_to "Edit", edit_item_stock_path(@item, stock.id) %></td>
       <td><%= link_to "Delete", method: :delete %></td>
       </tr>
       <% end %>
