@@ -106,42 +106,23 @@
   </div>
   <table>
     <tr>
-      <th>Size</th>
-      <th>Sale Price</th>
-      <th>Date</th>
-      <th>Time</th>
+      <th>Sale Price (USD)</th>
+      <th>Sale Price (MYR)</th>
+      <th>Date/Time</th>
     </tr>
     <tr>
-      <td>Peter</td>
-      <td>Griffin</td>
-      <td>$100</td>
-      <td>Test</td>
+      <% @table.each do |y| %>
+      <td><%= y.transacted_price %></td>
+      <td><%= y.transacted_price_myr %></td>
+      <td><%= y.date_time %></td>
     </tr>
-    <tr>
-      <td>Lois</td>
-      <td>Griffin</td>
-      <td>$150</td>
-      <td>Test</td>
-    </tr>
-    <tr>
-      <td>Joe</td>
-      <td>Swanson</td>
-      <td>$300</td>
-      <td>Test</td>
-    </tr>
-    <tr>
-      <td>Cleveland</td>
-      <td>Brown</td>
-      <td>$250</td>
-      <td>Test</td>
-    </tr>
+    <% end %>
   </table>
 
   <br>
   <table>
 <div class="graph col-sm-4 col-sm-offset-2 col-md-6">
   <% x = HistoricalTable.uniq.pluck(:model_number) %>
-
       <% if x.include?(@item.model_number) %>
       <%= @item.model_number %>
         <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr) %>
