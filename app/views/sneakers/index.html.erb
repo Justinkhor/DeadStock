@@ -73,8 +73,8 @@
             <% end %>
           </div>
           <span class="product-grid__title"><%= i.name %></span>
-          <span class="product-grid__price_description">LOWEST ASK</span>
-          <div class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></div>
+          <span class="product-grid__price_description">HIGHEST BID</span>
+          <span class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></span>
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
               <p class="product-grid__description"><%= i.model_number %></p>
@@ -125,7 +125,7 @@
           <div class="product-grid__price">RM <%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
-              <p class="product-grid__description"><%= i.model_number %></p>
+              <p class="product-grid__description"><%= i %></p>
               <span class="product-grid__btn product-grid__add-to-cart">
                 <i class="fa fa-cart-arrow-down"></i>
                 Add to cart</span>
