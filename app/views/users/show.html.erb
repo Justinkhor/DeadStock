@@ -19,10 +19,12 @@
 <table>
   <tr>
     <th>Item Name</th>
+    <th>Bid Price</th>
   </tr>
-<% @bid.each do |bid| %>
+<% @bids.each do |bid| %>
 <tr>
   <td><%= link_to bid.stock.item.name, bid.stock.item %></td>
+  <td><%= bid.bidding_price %>
 <% end %>
 </tr>
 </table>

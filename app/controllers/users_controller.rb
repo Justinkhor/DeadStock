@@ -27,7 +27,7 @@ class UsersController < Clearance::UsersController
     end
 
     def show
-      @bid = current_user.bids
+      @bids = User.find(params[:id]).bids
       # unless current_user.admin
         # redirect_to root_path
       # end
