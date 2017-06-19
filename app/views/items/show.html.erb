@@ -124,7 +124,6 @@
 <div class="graph col-sm-4 col-sm-offset-2 col-md-6">
   <% x = HistoricalTable.uniq.pluck(:model_number) %>
       <% if x.include?(@item.model_number) %>
-      <%= @item.model_number %>
         <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr) %>
       <% end %>
 
