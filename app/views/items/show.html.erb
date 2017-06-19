@@ -18,30 +18,58 @@
         <p>
           SIZE
         </p>
+        <select id="soflow">
+          <option>
+            Select Size
+          </option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
       </div>
     </div>
     <div class="item-options col-sm-3">
       <p>
         LAST SALE
       </p>
+
+    </div>
+    <div class="item-options col-sm-3">
+
+      <p>
+        LOWEST ASK
+      </p>
       <% if !@item.stocks.empty? %>
+      <p>
+        RM<%= @stock.resell_price %>
+      </p>
       <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
 
       <% else %>
       <p>
-        SORRY! NO STOCK AVAILABLE AT THIS MOMENT.
+        SORRY! NO STOCK AVAILABLE AT THE MOMENT.
       </p>
       <% end %>
     </div>
     <div class="item-options col-sm-3">
       <p>
-        LOWEST ASK
-      </p>
-    </div>
-    <div class="item-options col-sm-3">
-      <p>
         HIGHEST BID
       </p>
+      <% if @stock != nil %>
+      <% if !@stock.bids.empty? %>
+      <p>
+        RM<%=  @stock.bids.order('bidding_price ASC').last.bidding_price %>
+      </p>
+      <% else %>
+      <p>
+        THERE ARE NO BIDS AT THE MOMENT.
+      </p>
+      <% end %>
+      <% end %>
       <%= button_to "SELL", new_item_stock_path(@item), class:"myButton2", method: "get"%>
     </div>
   </div>
@@ -164,3 +192,26 @@
 <% end %>
 <%= link_to 'Back', root_path %>
 <br><br><br>
+
+<style>
+select#soflow, select#soflow-color {
+   -webkit-appearance: button;
+   -webkit-border-radius: 2px;
+   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+   -webkit-padding-end: 20px;
+   -webkit-padding-start: 2px;
+   -webkit-user-select: none;
+   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   border: 1px solid #AAA;
+   color: #555;
+   font-size: inherit;
+   margin: 20px;
+   overflow: hidden;
+   padding: 10px 10px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 100px;
+}
+</style>

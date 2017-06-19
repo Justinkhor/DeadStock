@@ -74,9 +74,18 @@
       <div class="product-title"><%= @item.name %></div>
       <p class="product-description"><%= @item.color %></p>
       <div class="product-bid">
+        <% if !@stock.bids.empty? %>
+        <p>
+          HIGHEST BID: RM<%=  @stock.bids.order('bidding_price ASC').last.bidding_price %>
+        </p>
+        <% else %>
+        <p>
+          HIGHEST BID: THERE ARE NO BIDS AT THE MOMENT.
+        </p>
+        <% end %>
       </div>
       <div class="product-bid">
-
+        LOWEST ASK: RM<%= @stock.resell_price %>
       </div>
 
 

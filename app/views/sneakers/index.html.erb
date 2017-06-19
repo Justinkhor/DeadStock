@@ -1,5 +1,5 @@
 <div class="jumbotron" id="jumbo-sneaker">
-  <h1 class="display-3">Empo X</h1>
+  <h1 class="display-3">Deadstock</h1>
   <p class="lead">Buy and sell authentic sneakers online</p>
   <br/>
   <form>
@@ -51,10 +51,9 @@
 </div>
 
 <h1>
-  <strong>Recently Added Stock</strong>
+  <strong>New Lowest Asks</strong>
 </h1>
 <hr class="style1">
-
 <div class="content">
   <!-- content here -->
   <div class="product-grid product-grid--flexbox">
@@ -74,7 +73,56 @@
             <% end %>
           </div>
           <span class="product-grid__title"><%= i.name %></span>
-          <span class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></span>
+          <span class="product-grid__price_description">LOWEST ASK</span>
+          <div class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></div>
+          <div class="product-grid__extend-wrapper">
+            <div class="product-grid__extend">
+              <p class="product-grid__description"><%= i.model_number %></p>
+              <span class="product-grid__btn product-grid__add-to-cart">
+                <i class="fa fa-cart-arrow-down"></i>
+                Add to cart</span>
+              <span class="product-grid__btn product-grid__view">
+                <i class="fa fa-eye"></i>
+                View more</span>
+            </div>
+          </div>
+        </div>
+      </div
+      <% end %>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<h1>
+  <strong>New Highest Bids</strong>
+</h1>
+<hr class="style1">
+
+<div class="content">
+  <!-- content here -->
+  <div class="product-grid product-grid--flexbox">
+    <div class="product-grid__wrapper">
+      <!-- Product list start here -->
+
+      <% @item.each do |i| %>
+      <% if i.category == "Sneakers" && !i.stocks.empty? %>
+      <% i.stocks.each do |y| %>
+      <% if !y.bids.empty?%>
+      <!-- Single product -->
+      <div class="product-grid__product-wrapper">
+        <div class="product-grid__product">
+          <% i.images.each do |x| %>
+          <div class="product-grid__img-wrapper">
+
+            <%= link_to item_path(i) do %>
+            <%= image_tag x.image.thumb.url %>
+            <% end %>
+          </div>
+          <span class="product-grid__title"><%= i.name %></span>
+          <span class="product-grid__price_description">HIGHEST BID</span>
+          <div class="product-grid__price">RM <%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
               <p class="product-grid__description"><%= i.model_number %></p>
@@ -89,10 +137,11 @@
         </div>
       </div>
       <% end %>
+
+      <% end %>
+      <% end %>
       <% end %>
       <% end %>
     </div>
   </div>
 </div>
-
-

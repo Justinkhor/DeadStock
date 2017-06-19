@@ -27,6 +27,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @stock = @item.stocks.order('resell_price DESC').last
     # @bid = @item.bids.new
     # @errors = @bid.errors.full_messages
     # @stock = @item.stocks.find(stock_params)
