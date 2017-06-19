@@ -25,7 +25,4 @@ class Bid < ApplicationRecord
    end
  end
 
-
-
->>>>>>> master
 end
