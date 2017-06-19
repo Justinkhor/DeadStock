@@ -29,7 +29,8 @@
           </div>
           <span class="product-grid__title"><%= i.name %></span>
           <span class="product-grid__title"><%= i.color %></span>
-          <span class="product-grid__price">RM<%= i.retail_price %></span>
+          <% table = HistoricalTable.where(model_number: i.model_number).order('date_time DESC') %>
+          <span class="product-grid__price"># OF SALES: <%= table.size %></span>
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
               <p class="product-grid__description"><%= i.model_number %></p>
