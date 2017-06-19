@@ -127,9 +127,18 @@ body {
 	}
 
 	&__price {
+		font-family: proxima-nova,sans-serif;
 		color: black;
 		font-weight: bold;
-		font-size: 15px;
+		font-size: 20px;
+		letter-spacing: .4px;
+	}
+
+	&__price_description {
+		font-family: proxima-nova,sans-serif;
+		color: black;
+		font-weight: bold;
+		font-size: 13px;
 		letter-spacing: .4px;
 	}
 

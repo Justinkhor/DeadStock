@@ -11,7 +11,6 @@ class UsersController < Clearance::UsersController
 
     def create
         @user = User.new(user_params)
-        byebug
         if @user.save
             sign_in @user
             redirect_back_or url_after_create
