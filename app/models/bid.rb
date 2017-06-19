@@ -1,12 +1,13 @@
 class Bid < ApplicationRecord
   belongs_to :user
   belongs_to :stock
-  validate :check_min_bid
+  validate :check_minimum_bid
 
-  def check_min_bid
+  def check_minimum_bid
     return if bidding_price >= 100
-    errors.add(:min_bid, ": Minimum bidding amount is RM100.")
+    errors.add(:minimum_bid, ": Minimum bidding amount is RM100.")
   end
+
 
   def bid
    if current_user == Stock.find(params[:stock_id]).user
@@ -26,4 +27,5 @@ class Bid < ApplicationRecord
 
 
 
+>>>>>>> master
 end
