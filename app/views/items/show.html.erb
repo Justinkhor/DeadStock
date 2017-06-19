@@ -91,19 +91,20 @@
 
   <div class="item-description col-sm-4">
     <p>
-      <strong>COLORWAY:</strong><%= @item.color %>
+      <strong>COLORWAY: </strong><%= @item.color %>
     </p>
   </div>
   <div class="item-description col-sm-4">
     <p>
-      <strong>RETAIL PRICE:</strong><%= @item.retail_price %>
+      <strong>RETAIL PRICE: </strong><%= @item.retail_price %> (RM<%= (@item.retail_price * 4.36).to_i %>)
     </p>
   </div>
   <div class="item-description col-sm-4">
     <p>
-      <strong>RELEASE DATE:</strong><%= @item.release_date %>
+      <strong>RELEASE DATE: </strong><%= @item.release_date %>
     </p>
   </div>
+  <br>
   <table>
     <tr>
       <th>Sale Price (USD)</th>
@@ -111,7 +112,7 @@
       <th>Date/Time</th>
     </tr>
     <tr>
-      <% @table.each do |y| %>
+      <% @table.first(5).each do |y| %>
       <td><%= y.transacted_price %></td>
       <td><%= y.transacted_price_myr %></td>
       <td><%= y.date_time %></td>
@@ -129,7 +130,17 @@
 
 </div>
 </table>
-
+<h1> Historical </h1>
+  <% @table.first(1).each do |x| %>
+<p> # OF SALES : <%= @table.size %> </p>
+<p> Price Premium : <%= (((x.transacted_price - @item.retail_price)/@item.retail_price.to_f) * 100).round(2) %>%</p>
+  <% end %>
+  <% sum = 0 %>
+  <% @table.each do |x| %>
+    <% sum  += x.transacted_price %>
+  <% end %>
+<p>Average Sale Price(USD) : <%= (sum/@table.size) %></p>
+<p>Average Sale Price(MYR) : <%= ((sum/@table.size) * 4.36).to_i %></p>
   <br>
 
 </div>
