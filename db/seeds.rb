@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-xlsx = Roo::Spreadsheet.open(File.join(Rails.root,  "sneakers_price_simulation2.xlsx")) 
+xlsx = Roo::Spreadsheet.open(File.join(Rails.root,  "sneakers_price_simulation3.xlsx")) 
 
 
 
