@@ -9,10 +9,5 @@ class Stock < ApplicationRecord
     errors.add(:negative_price, "Price cannot be negative.")
   end
 
-  def lowest_ask
-    @stock.all.order('resell_price DESC').last.resell_price
-  end
-
-
 end
 

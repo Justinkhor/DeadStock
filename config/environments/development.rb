@@ -67,7 +67,7 @@ config.public_file_server.enabled = true
 
    config.action_mailer.perform_deliveries = true
    config.action_mailer.raise_delivery_errors = true
-   config.action_mailer.default_options = {from: 'justinairbnbclone@gmail.com'}
+   config.action_mailer.default_options = {from: 'deadstocksmy@gmail.com'}
    config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
 end

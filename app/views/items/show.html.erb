@@ -25,16 +25,9 @@
           SIZE
         </p>
         <select id="soflow">
-          <option>
-            Select Size
-          </option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
+          <% @item.stocks.order('size ASC').each do |stock| %>
+          <option><%= stock.size %></option>
+          <%end%>
         </select>
       </div>
     </div>
@@ -59,7 +52,11 @@
         RM<%= @stock.resell_price %>
       </div>
       <div class="inner-options col-sm-6">
-      <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
+      <% if @stock.bids.find_by(chosen_bid: true, user_id: current_user.id)   %>
+            <p> YOU ARE THE HIGHEST BIDDER, STOP TRYING! </p>
+          <% else %>
+          <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
+        <% end %>
       </div>
 
     <% else %>
@@ -207,10 +204,7 @@
   </div>
 
   <% if signed_in? %>
-  <% if current_user.role != "admin"%>
-  <%= link_to "Sell", new_item_stock_path(@item) %>
-  |
-<% else %>
+  <% if current_user.role == "admin"%>
   <br/>
   <div class="item-chart col-sm-12">
 
@@ -224,6 +218,7 @@
       <th>Size</th>
       <th>Resell Price</th>
       <th>Closing Date</th>
+      <th>Sold?</th>
       <th></th>
       <th></th>
     </tr>
@@ -235,8 +230,9 @@
       <td><%= stock.size %></td>
       <td><%= stock.resell_price %></td>
       <td><%= stock.closing_date %></td>
+      <td><%= stock.sold %></td>
       <td><%= link_to "Edit", edit_item_stock_path(stock.item_id, stock) %></td>
-      <td><%= link_to 'Destroy', item_stock_path(stock.item_id,stock), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', item_stock_path(stock.item_id, stock), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     </table>
@@ -251,7 +247,6 @@
         <th>Gender</th>
         <th>Size</th>
         <th>Bidding Price</th>
-        <th>Closing Date</th>
         <th></th>
         <th></th>
       </tr>
@@ -263,8 +258,7 @@
       <td><%= bid.gender %></td>
       <td><%= bid.size %></td>
       <td><%= bid.bidding_price %></td>
-      <td><%= bid.closing_date %></td>
-      <td><%= link_to 'Destroy', item_path(stock.item_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', bid_path(bid), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
       <% end %>

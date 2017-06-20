@@ -27,7 +27,8 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @stock = @item.stocks.order('resell_price DESC').last
+
+    @stock = @item.stocks.where(sold: false).order('resell_price DESC').last
     @table = HistoricalTable.where(model_number: @item.model_number).order('date_time DESC')
     # @bid = @item.bids.new
     # @errors = @bid.errors.full_messages

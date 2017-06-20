@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619092501) do
+
+ActiveRecord::Schema.define(version: 20170620070244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +30,12 @@ ActiveRecord::Schema.define(version: 20170619092501) do
     t.integer  "user_id"
     t.integer  "stock_id"
     t.integer  "bidding_price"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "size"
     t.string   "gender"
-    t.date     "closing_date"
+    t.boolean  "chosen_bid",    default: false
+    t.boolean  "payment_made",  default: false
     t.index ["stock_id"], name: "index_bids_on_stock_id", using: :btree
     t.index ["user_id"], name: "index_bids_on_user_id", using: :btree
   end
@@ -88,9 +90,10 @@ ActiveRecord::Schema.define(version: 20170619092501) do
     t.integer  "size"
     t.string   "gender"
     t.integer  "resell_price"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.date     "closing_date"
+    t.boolean  "sold",         default: false
     t.index ["item_id"], name: "index_stocks_on_item_id", using: :btree
     t.index ["user_id"], name: "index_stocks_on_user_id", using: :btree
   end
