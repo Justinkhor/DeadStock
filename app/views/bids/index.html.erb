@@ -1,4 +1,4 @@
-<h1>Stocks</h1>
+<h1>Bids</h1>
 
 <table>
   <thead>
@@ -14,14 +14,14 @@
   </thead>
 
   <tbody>
-    <% @stocks.each do |stock| %>
+    <% @bids.each do |bid| %>
       <tr>
-        <td><%= stock.user.username %></td>
-        <td><%= stock.item.name %></td>
-        <td><%= stock.gender %></td>
-        <td><%= stock.size %></td>
-        <td><%= stock.resell_price %></td>
-        <td><%= stock.closing_date %></td>
+        <td><%= bid.user.username %></td>
+        <td><%= bid.item.name %></td>
+        <td><%= bid.gender %></td>
+        <td><%= bid.size %></td>
+        <td><%= bid.resell_price %></td>
+        <td><%= bid.closing_date %></td>
         <td><%= link_to 'Show', item_stock_path(stock.item_id, stock) %></td>
         <td><%= link_to 'Edit', edit_item_stock_path(stock.item_id, stock) %></td>
         <td><%= link_to 'Destroy', item_stock_path(stock.item_id, stock), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -3,7 +3,7 @@ class BidsController < ApplicationController
 
 
 	def index
-		@bids = current_user.bids
+    @bids = Bid.all.order('created_at DESC').paginate(:page => params[:page]).per_page(20)
 	end
 
 	def show
@@ -15,6 +15,7 @@ class BidsController < ApplicationController
   end
 
   def new
+    @user = current_user
     @item = Item.find(params[:item_id])
     @stock = @item.stocks.order('resell_price DESC').last
     @bid = Bid.new
@@ -26,14 +27,27 @@ class BidsController < ApplicationController
 		@bid = current_user.bids.new(bid_params)
     @bid.stock_id = @stock.id
     # @bid.item = @item
-    if @bid.save
-      # @host = User.find(@item.user_id)
-      #     # BidMailer.bid_email(current_user, @host, @bid.item.id, @bid.id).deliver_later
-      #     BidJob.perform_later(current_user, @host, @bid.item.id, @bid.id)
-  		redirect_to new_bid_braintree_path(@bid) , notice: "Your bid has been created, please make payment to confirm the bid."
+    if params[:buy]
+      if @bid.save
+        # @host = User.find(@item.user_id)
+        #     # BidMailer.bid_email(current_user, @host, @bid.item.id, @bid.id).deliver_later
+        #     BidJob.perform_later(current_user, @host, @bid.item.id, @bid.id)
+    		redirect_to new_bid_braintree_path(@bid) , notice: "Please make payment to secure your item."
+      else
+        @errors = @bid.errors.full_messages
+        render "items/show"
+      end
     else
-      @errors = @bid.errors.full_messages
-      render "items/show"
+      if (params[:bid][:bidding_price]).to_i <= 100
+         redirect_to item_path(@item), notice: "Minimum bid is RM100."
+      elsif (params[:bid][:bidding_price]).to_i <= highest_bid
+         redirect_to item_path(@item), notice: "Please make a higher bid."
+      elsif (params[:bid][:bidding_price]).to_i >= lowest_ask
+         redirect_to item_path(@item), notice: "Might as well buy now?"
+      else
+        @bid.save
+         redirect_to item_path(@item), notice: "Congratulations on being the highest bidder at the moment!"
+      end
     end
 	end
 
@@ -44,6 +58,18 @@ class BidsController < ApplicationController
     @bid = Bid.find(params[:id])
     @bid.destroy
     redirect_to @bid.user
+  end
+
+  def highest_bid
+    if !@stock.bids.empty?
+      @stock.bids.order('bidding_price ASC').last.bidding_price
+    else
+      highest_bid = 100
+    end
+  end
+
+  def lowest_ask
+    @stock.resell_price
   end
 
   private

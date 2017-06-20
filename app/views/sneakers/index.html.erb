@@ -1,5 +1,5 @@
 <div class="jumbotron" id="jumbo-sneaker">
-  <h1 class="display-3">Deadstock</h1>
+  <%= image_tag "logo-1-white.png", :class => 'deadstock-logo' %>
   <p class="lead">Buy and sell authentic sneakers online</p>
   <br/>
   <form>
@@ -44,121 +44,132 @@
           </div>
           <span class="product-grid__title"><%= i.name %></span>
           <span class="product-grid__title"><%= i.color %></span>
-          <span class="product-grid__price">RM<%= i.retail_price %></span>
+          <% table = HistoricalTable.where(model_number: i.model_number).order('date_time DESC') %>
+          <span class="product-grid__price_description"># OF SALES</span>
+          <br/>
+          <span class="product-grid__price"><%= table.size %></span>
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
               <p class="product-grid__description"><%= i.model_number %></p>
-              <span class="product-grid__btn product-grid__add-to-cart">
-                <i class="fa fa-cart-arrow-down"></i>
-                Add to cart</span>
-              <span class="product-grid__btn product-grid__view">
-                <i class="fa fa-eye"></i>
-                View more</span>
+              <span class="product-up">
+                RM 1090
+              </span>
+              <span class="product-up-2">
+                ▲ +113
+                <a class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
+                  <i class="fa fa-eye"></i>
+                  View more</a>
+              </div>
             </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <h1>
+    <strong>New Lowest Asks</strong>
+  </h1>
+  <hr class="style1">
+  <div class="content">
+    <!-- content here -->
+    <div class="product-grid product-grid--flexbox">
+      <div class="product-grid__wrapper">
+        <!-- Product list start here -->
+
+        <% @item.each do |i| %>
+        <% if i.category == "Sneakers" && !i.stocks.empty? %>
+        <!-- Single product -->
+        <div class="product-grid__product-wrapper">
+          <div class="product-grid__product">
+            <% i.images.each do |x| %>
+            <div class="product-grid__img-wrapper">
+
+              <%= link_to item_path(i) do %>
+              <%= image_tag x.image.thumb.url %>
+              <% end %>
+            </div>
+            <span class="product-grid__title"><%= i.name %></span>
+            <span class="product-grid__title"><%= i.color %></span>
+            <span class="product-grid__price_description">LOWEST ASK</span>
+            <br/>
+            <span class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></span>
+            <div class="product-grid__extend-wrapper">
+              <div class="product-grid__extend">
+                <p class="product-grid__description"><%= i.model_number %></p>
+                <span class="product-up">
+                  RM 1090
+                </span>
+                <span class="product-up-2">
+                  ▲ +113
+                  <span class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
+                    <i class="fa fa-eye"></i>
+                    View more</span>
+                </div>
+              </div>
+            </div>
+          </div <% end %>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <h1>
+      <strong>New Highest Bids</strong>
+    </h1>
+    <hr class="style1">
+
+    <div class="content">
+      <!-- content here -->
+      <div class="product-grid product-grid--flexbox">
+        <div class="product-grid__wrapper">
+          <!-- Product list start here -->
+
+          <% @item.each do |i| %>
+          <% if i.category == "Sneakers" && !i.stocks.empty? %>
+          <% i.stocks.each do |y| %>
+          <% if !y.bids.empty?%>
+          <!-- Single product -->
+          <div class="product-grid__product-wrapper">
+            <div class="product-grid__product">
+              <% i.images.each do |x| %>
+              <div class="product-grid__img-wrapper">
+
+                <%= link_to item_path(i) do %>
+                <%= image_tag x.image.thumb.url %>
+                <% end %>
+              </div>
+              <span class="product-grid__title"><%= i.name %></span>
+              <span class="product-grid__title"><%= i.color %></span>
+              <span class="product-grid__price_description">HIGHEST BID</span>
+              <div class="product-grid__price">RM
+                <%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
+              <div class="product-grid__extend-wrapper">
+                <div class="product-grid__extend">
+                  <p class="product-grid__description"><%= i %></p>
+                  <span class="product-up">
+                    RM 1090
+                  </span>
+                  <span class="product-up-2">
+                    ▲ +113
+                    <span class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
+                      <i class="fa fa-eye"></i>
+                      View more</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+
+            <% end %>
+            <% end %>
+            <% end %>
+            <% end %>
           </div>
         </div>
       </div>
-      <% end %>
-      <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<h1>
-  <strong>New Lowest Asks</strong>
-</h1>
-<hr class="style1">
-<div class="content">
-  <!-- content here -->
-  <div class="product-grid product-grid--flexbox">
-    <div class="product-grid__wrapper">
-      <!-- Product list start here -->
-
-      <% @item.each do |i| %>
-      <% if i.category == "Sneakers" && !i.stocks.empty? %>
-      <!-- Single product -->
-      <div class="product-grid__product-wrapper">
-        <div class="product-grid__product">
-          <% i.images.each do |x| %>
-          <div class="product-grid__img-wrapper">
-
-            <%= link_to item_path(i) do %>
-            <%= image_tag x.image.thumb.url %>
-            <% end %>
-          </div>
-          <span class="product-grid__title"><%= i.name %></span>
-          <span class="product-grid__price_description">LOWEST ASK</span>
-          <div class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></div>
-          <div class="product-grid__extend-wrapper">
-            <div class="product-grid__extend">
-              <p class="product-grid__description"><%= i.model_number %></p>
-              <span class="product-grid__btn product-grid__add-to-cart">
-                <i class="fa fa-cart-arrow-down"></i>
-                Add to cart</span>
-              <span class="product-grid__btn product-grid__view">
-                <i class="fa fa-eye"></i>
-                View more</span>
-            </div>
-          </div>
-        </div>
-      </div
-      <% end %>
-      <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<h1>
-  <strong>New Highest Bids</strong>
-</h1>
-<hr class="style1">
-
-<div class="content">
-  <!-- content here -->
-  <div class="product-grid product-grid--flexbox">
-    <div class="product-grid__wrapper">
-      <!-- Product list start here -->
-
-      <% @item.each do |i| %>
-      <% if i.category == "Sneakers" && !i.stocks.empty? %>
-      <% i.stocks.each do |y| %>
-      <% if !y.bids.empty?%>
-      <!-- Single product -->
-      <div class="product-grid__product-wrapper">
-        <div class="product-grid__product">
-          <% i.images.each do |x| %>
-          <div class="product-grid__img-wrapper">
-
-            <%= link_to item_path(i) do %>
-            <%= image_tag x.image.thumb.url %>
-            <% end %>
-          </div>
-          <span class="product-grid__title"><%= i.name %></span>
-          <span class="product-grid__price_description">HIGHEST BID</span>
-          <div class="product-grid__price">RM <%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
-          <div class="product-grid__extend-wrapper">
-            <div class="product-grid__extend">
-              <p class="product-grid__description"><%= i.model_number %></p>
-              <span class="product-grid__btn product-grid__add-to-cart">
-                <i class="fa fa-cart-arrow-down"></i>
-                Add to cart</span>
-              <span class="product-grid__btn product-grid__view">
-                <i class="fa fa-eye"></i>
-                View more</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% end %>
-
-      <% end %>
-      <% end %>
-      <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
-
 

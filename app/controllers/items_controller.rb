@@ -28,6 +28,7 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
     @stock = @item.stocks.order('resell_price DESC').last
+    @table = HistoricalTable.where(model_number: @item.model_number).order('date_time DESC')
     # @bid = @item.bids.new
     # @errors = @bid.errors.full_messages
     # @stock = @item.stocks.find(stock_params)
@@ -91,10 +92,21 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+      format.html { redirect_to items_url, notice: 'Item was successfully deleted.' }
       format.json { head :no_content }
     end
   end
+
+  def get_insta_tag
+    response = RestClient.get("https://api.instagram.com/v1/tags/{tag-name}?access_token=ACCESS-TOKEN")
+    result = JSON.parse(response.body)
+
+    @pokemon_url = result["sprites"]["front_default"]
+    @pokemon_name = result["name"]
+    @pokemon_no = result["id"]
+    @pokemon_type = result["types"][0]["type"]["name"]
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

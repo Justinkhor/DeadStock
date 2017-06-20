@@ -1,55 +1,94 @@
+<h1>Bid Or Buy Now</h1>
 <div class="padding-top">
+    <div class="container">
+    <%= form_for([@item, @stock, @bid]) do |f| %>
+    <% if @errors.present? %>
+    <p><% @errors %></p>
+    <%end%>
+
+    <div class="field">
+      <%= f.label :gender %>
+      <%= f.select :gender, ['Male', 'Female'] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :size %>
+      <%= f.select :size, ['6', '7', '8', '9', '10', '11', '12', '13', '14'] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :bidding_price %>
+      <%= f.number_field :bidding_price %>
+    </div>
+
+    <div class="field">
+      <%= f.label :closing_date %>
+      <%= f.date_field :closing_date, min: Date.today.strftime('%Y-%m-%d'), max: @stock.closing_date %>
+    </div>
+
+    <br>
+    <div class="row">
+    	<div class="col-md-offset-4 col-md-4">
+    		<table class = "bid-table">
+    			<tbody>
+    				<tr>
+    					<td>Bidding Price: </td>
+    					<td>0</td>
+    				</tr>
+    			</tbody>
+    		</table>
+    	</div>
+    </div>
+
+    	<br/>
+      <div class="actions">
+        <%= f.submit "Bid"%>
+      </div>
+    <% end %>
+    </div>
 
 </div>
 
-<h1> Buy </h1>
-<div class="container">
-<%= form_for([@item, @stock, @bid]) do |f| %>
-<% if @errors.present? %>
-<p><% @errors %></p>
-<%end%>
 
-<div class="field">
-  <%= f.label :gender %>
-  <%= f.select :gender, ['Male', 'Female'] %>
+<div class="padding-top">
+    <div class="container">
+    <%= form_for([@item, @stock, @bid]) do |f| %>
+    <% if @errors.present? %>
+    <p><% @errors %></p>
+    <%end%>
+
+    <div class="field">
+      <%= f.label :gender %>
+      <%= f.select :gender, ['Male', 'Female'] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :size %>
+      <%= f.select :size, ['6', '7', '8', '9', '10', '11', '12', '13', '14'] %>
+    </div>
+
+    <br>
+    <div class="row">
+    	<div class="col-md-offset-4 col-md-4">
+    		<table class = "bid-table">
+    			<tbody>
+    				<tr>
+    					<td>Buy Price: </td>
+    					<td><%=@stock.resell_price%></td>
+    				</tr>
+    			</tbody>
+    		</table>
+    	</div>
+    </div>
+
+    	<br/>
+      <div class="actions">
+        <%= f.submit "Buy Now", name: "buy" %>
+      </div>
+    <% end %>
+    </div>
+
 </div>
-
-<div class="field">
-  <%= f.label :size %>
-  <%= f.select :size, ['6', '7', '8', '9', '10', '11', '12', '13', '14'] %>
-</div>
-
-<div class="field">
-  <%= f.label :bidding_price %>
-  <%= f.number_field :bidding_price %>
-</div>
-
-<div class="field">
-  <%= f.label :closing_date %>
-  <%= f.date_field :closing_date, min: Date.today.strftime('%Y-%m-%d'), max: @stock.closing_date %>
-</div>
-
-<br>
-<div class="row">
-	<div class="col-md-offset-4 col-md-4">
-		<table class = "bid-table">
-			<tbody>
-				<tr>
-					<td>Bidding Price: </td>
-					<td>0</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
-
-	<br/>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-</div>
-
 <h1>Shopping Cart</h1>
 
 <div class="shopping-cart">

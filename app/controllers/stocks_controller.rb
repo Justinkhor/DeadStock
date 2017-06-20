@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
   before_action :require_login
-  before_action :find_item
+  before_action :find_item, except: [:index]
 
   def new
     @stock = Stock.new
@@ -17,12 +17,11 @@ class StocksController < ApplicationController
   end
 
   def edit
-    @stock = Stock.find(params[:id])
+
   end
 
   def update
-    @stock = current_user.stocks.new(stock_params)
-    @stock.item_id = params[:item_id]
+    @stock = Stock.find(params[:id])
       if @stock.update(stock_params)
         redirect_to item_stock_path(@item, @stock), notice: "You have successfully edited your stock."
       else
