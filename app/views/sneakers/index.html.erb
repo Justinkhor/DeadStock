@@ -6,6 +6,21 @@
     <input type="text-search" name="search" placeholder="Search for brand, color etc.">
   </form>
 </div>
+<div class ="index_graph_row">
+  <div class="index_graph col-sm-4">
+    <h4> 6month turnover +11%  |  Fornightly change +64,565 </h4>
+    <%= area_chart IndexTable.group(:index_date).sum(:jordan_index), xtitle: "Jordan Index", width: "440px", height: "200px"%>
+    </div>
+      <div class="index_graph col-sm-4">
+      <h4> 6month turnover -1%  |  Fornightly change -10,545 </h4>
+    <%= area_chart IndexTable.group(:index_date).sum(:nike_index), xtitle: "Nike Index",width: "440px",height: "200px" %>
+    </div>
+      <div class="index_graph col-sm-4">
+      <h4> 6month turnover +9%  |  Fornightly change +20,182 </h4>
+    <%= area_chart IndexTable.group(:index_date).sum(:adidas_index),xtitle: "Adidas Index", width: "440px",height: "200px"%>
+    </div>
+  </div>
+
 <h1>
   <strong>Most Popular Items</strong>
 </h1>
@@ -157,3 +172,4 @@
           </div>
         </div>
       </div>
+

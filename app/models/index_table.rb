@@ -1,0 +1,6 @@
+class IndexTable< ApplicationRecord
+
+
+  
+
+end
