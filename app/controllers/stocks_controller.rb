@@ -9,11 +9,16 @@ class StocksController < ApplicationController
   def create
     @stock = current_user.stocks.new(stock_params)
     @stock.item_id = params[:item_id]
+    # if params[:sell]
+    #   if @stock.save
+    #     redirect_to item
+    #   end
+    # else
       if @stock.save
         redirect_to item_stock_path(@item, @stock), notice: "You have successfully created a stock."
       else
         redirect_to item_path(@item), notice: "Failed to create stock."
-      end
+    end
   end
 
   def edit

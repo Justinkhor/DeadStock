@@ -1,4 +1,4 @@
-<h1>New Stock</h1>
+<h1>Ask</h1><br>
 <div class="container">
 <%= form_for([@item, @stock]) do |f| %>
 
@@ -23,8 +23,10 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Ask"%>
   </div>
 
 <% end %>
 </div>
+
+<br><br>

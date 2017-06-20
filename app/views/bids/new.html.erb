@@ -21,11 +21,6 @@
       <%= f.number_field :bidding_price %>
     </div>
 
-    <div class="field">
-      <%= f.label :closing_date %>
-      <%= f.date_field :closing_date, min: Date.today.strftime('%Y-%m-%d'), max: @stock.closing_date %>
-    </div>
-
     <br>
     <div class="row">
     	<div class="col-md-offset-4 col-md-4">
@@ -68,6 +63,7 @@
     </div>
 
     <br>
+    <%= f.hidden_field :bidding_price, value: @stock.resell_price %>
     <div class="row">
     	<div class="col-md-offset-4 col-md-4">
     		<table class = "bid-table">
