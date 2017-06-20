@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20170620070244) do
 
   # These are extensions that must be enabled in order to support this database
@@ -58,6 +59,15 @@ ActiveRecord::Schema.define(version: 20170620070244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_images_on_item_id", using: :btree
+  end
+
+  create_table "index_tables", force: :cascade do |t|
+    t.date     "index_date"
+    t.integer  "jordan_index"
+    t.integer  "nike_index"
+    t.integer  "adidas_index"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "items", force: :cascade do |t|

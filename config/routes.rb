@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "/handbags" => "handbags#index"
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
 
+
   resources :items do
     resources :stocks do
       resources :bids, only: [:create, :new]
