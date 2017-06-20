@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
   resources :images, only: [:destroy]
+
   resources :users, controller: "users" do
     resource :password,
       controller: "clearance/passwords",
@@ -25,7 +26,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bids, only: [:destroy] do
+  resources :stocks, only: [:index]
+
+  resources :bids, only: [:destroy, :index] do
     resources :braintree, only: [:new, :create]
   end
 
