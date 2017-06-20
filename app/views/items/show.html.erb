@@ -225,16 +225,44 @@
       <td><%= stock.size %></td>
       <td><%= stock.resell_price %></td>
       <td><%= stock.closing_date %></td>
-      <td><%= link_to "Edit", edit_item_stock_path(@item, stock.id) %></td>
-      <td><%= link_to "Delete", method: :delete %></td>
-    </tr>
-    <% end %>
-  </table>
-</div>
-  <br>
+      <td><%= link_to "Edit", edit_item_stock_path(stock.item_id, stock) %></td>
+      <td><%= link_to 'Destroy', item_stock_path(stock.item_id,stock), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </table>
+    <br>
 
-  <%= link_to 'Edit', edit_item_path(@item) %>
-  |
+    <h3>Bids:</h3>
+    <br>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Gender</th>
+        <th>Size</th>
+        <th>Bidding Price</th>
+        <th>Closing Date</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <% @item.stocks.each do |stock| %>
+      <% stock.bids.each do |bid| %>
+      <tr>
+      <td><%= bid.id %></td>
+      <td><%= bid.user.username %></td>
+      <td><%= bid.gender %></td>
+      <td><%= bid.size %></td>
+      <td><%= bid.bidding_price %></td>
+      <td><%= bid.closing_date %></td>
+      <td><%= link_to 'Destroy', item_path(stock.item_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </table>
+    <br>
+
+
+  <%= link_to 'Edit', edit_item_path(@item) %> |
 
   <% end %>
   <% end %>
