@@ -22,6 +22,9 @@ gem 'coffee-rails', '~> 4.2'
 gem 'roo'
 gem 'chartkick'
 gem 'groupdate'
+gem 'omniauth-instagram'
+gem 'omniauth'
+gem 'instagram'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

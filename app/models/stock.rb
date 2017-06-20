@@ -12,4 +12,7 @@ class Stock < ApplicationRecord
   def lowest_ask
     @stock.all.order('resell_price DESC').last.resell_price
   end
+
+
 end
+
