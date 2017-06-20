@@ -39,9 +39,14 @@
       </div>
     </div>
     <div class="item-options col-sm-3">
+      <% @table.first(1).each do |x| %>
       <p>
         LAST SALE
       </p>
+      <p class="value">
+      RM <%= x.transacted_price_myr %>
+      </p>
+      <% end %>
 
     </div>
     <div class="item-options col-sm-3">
@@ -50,13 +55,15 @@
         LOWEST ASK
       </p>
       <% if !@item.stocks.empty? %>
-      <p>
+      <div class="inner-options col-sm-6">
         RM<%= @stock.resell_price %>
-      </p>
+      </div>
+      <div class="inner-options col-sm-6">
       <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
+      </div>
 
     <% else %>
-      <p>
+      <p class ="sorry">
         SORRY! NO STOCK AVAILABLE AT THE MOMENT.
       </p>
       <% end %>
@@ -67,18 +74,20 @@
       </p>
       <% if @stock != nil %>
       <% if !@stock.bids.empty? %>
-      <p>
+      <div class="inner-options col-sm-6">
         RM<%=  @stock.bids.order('bidding_price ASC').last.bidding_price %>
-      </p>
+      </div>
     <% else %>
-      <p>
+      <div class="inner-options col-sm-6">
         THERE ARE NO BIDS AT THE MOMENT.
-      </p>
+      </div>
       <% end %>
       <% end %>
+      <div class="inner-options col-sm-6">
       <%= button_to "SELL", new_item_stock_path(@item), class:"myButton2", method: "get"%>
     </div>
   </div>
+</div>
 
   <% if @errors.present? %>
   <p><% @errors.each do |x| %>
@@ -96,7 +105,8 @@
   <br/>
 
   <div class="item-description col-sm-4">
-    <p>
+    <p style="
+      margin-bottom: 0px;">
       <strong>COLORWAY:
       </strong><%= @item.color %>
     </p>
@@ -118,7 +128,7 @@
   <br />
   <br>
   <div class="item-table col-sm-6">
-    <h1 style="margin-top: 0px;">Latest Sales</h1>
+    <h1 style="margin-top: 20px;">Latest Sales</h1>
     <hr class="style1">
     <table>
       <tr>
@@ -284,6 +294,15 @@
 
     .fa-certificate {
       color: #0091b0;
+    }
+
+    .sorry {
+      font-size: 15px;
+    }
+
+    .value {
+      font-size: 20px;
+      font-weight: bold;
     }
 
   </style>
