@@ -1,17 +1,23 @@
 <div id="item-show">
   <div class="row">
     <div class="item-header">
-        <%= @item.name %>
+      <%= @item.name %>
       <%= @item.color %>
     </div>
   </div>
 
-
   <div class="item-symbols">
-    <p>
-      TICKER: <%= @item.model_number %> | CONDITION: DEADSTOCK
-    </p>
+    <span class="fa fa-bar-chart" aria-hidden="true"></span>
+<span>
+      TICKER:
+      <%= @item.model_number %> |
+    </span>
+    <span class="fa fa-certificate" aria-hidden="true"></span>
+    <span>
+       CONDITION: DEADSTOCK
+    </span>
   </div>
+  <br />
   <div class="row">
     <div class="item-options col-sm-3">
       <div class="row">
@@ -49,7 +55,7 @@
       </p>
       <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
 
-      <% else %>
+    <% else %>
       <p>
         SORRY! NO STOCK AVAILABLE AT THE MOMENT.
       </p>
@@ -64,7 +70,7 @@
       <p>
         RM<%=  @stock.bids.order('bidding_price ASC').last.bidding_price %>
       </p>
-      <% else %>
+    <% else %>
       <p>
         THERE ARE NO BIDS AT THE MOMENT.
       </p>
@@ -77,94 +83,142 @@
   <% if @errors.present? %>
   <p><% @errors.each do |x| %>
     <%= x %>
-      <% end %>
+    <% end %>
   </p>
   <%end%>
   <div class="row">
     <div class="col-md-offset-3 col-md-6">
-          <% @item.images.each do |i| %>
-                <%= image_tag i.image.url, style:"width: 100%" %>
-          <% end %>
+      <% @item.images.each do |i| %>
+      <%= image_tag i.image.url, style:"width: 100%" %>
+      <% end %>
     </div>
   </div>
+  <br/>
+
+  <div class="item-description col-sm-4">
+    <p>
+      <strong>COLORWAY:
+      </strong><%= @item.color %>
+    </p>
+  </div>
+  <div class="item-description col-sm-4">
+    <p>
+      <strong>RETAIL PRICE:
+      </strong><%= @item.retail_price %>
+      (RM<%= (@item.retail_price * 4.36).to_i %>)
+    </p>
+  </div>
+  <div class="item-description col-sm-4">
+    <p>
+      <strong>RELEASE DATE:
+      </strong><%= @item.release_date %>
+    </p>
+  </div>
   <br />
-
-  <div class="item-description col-sm-4">
-    <p>
-      <strong>COLORWAY: </strong><%= @item.color %>
-    </p>
-  </div>
-  <div class="item-description col-sm-4">
-    <p>
-      <strong>RETAIL PRICE: </strong><%= @item.retail_price %> (RM<%= (@item.retail_price * 4.36).to_i %>)
-    </p>
-  </div>
-  <div class="item-description col-sm-4">
-    <p>
-      <strong>RELEASE DATE: </strong><%= @item.release_date %>
-    </p>
-  </div>
+  <br />
   <br>
-  <table>
-    <tr>
-      <th>Sale Price (USD)</th>
-      <th>Sale Price (MYR)</th>
-      <th>Date/Time</th>
-    </tr>
-    <tr>
-      <% @table.first(5).each do |y| %>
-      <td><%= y.transacted_price %></td>
-      <td><%= y.transacted_price_myr %></td>
-      <td><%= y.date_time %></td>
-    </tr>
-    <% end %>
-  </table>
-
-  <br>
-  <table>
-<div class="graph col-sm-4 col-sm-offset-2 col-md-6">
-  <% x = HistoricalTable.uniq.pluck(:model_number) %>
-      <% if x.include?(@item.model_number) %>
-      <%= @item.model_number %>
-        <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr) %>
-      <% end %>
-
-</div>
-</table>
-<h1> Historical </h1>
-  <% @table.first(1).each do |x| %>
-<p> # OF SALES : <%= @table.size %> </p>
-<p> Price Premium : <%= (((x.transacted_price - @item.retail_price)/@item.retail_price.to_f) * 100).round(2) %>%</p>
-  <% end %>
-  <% sum = 0 %>
-  <% @table.each do |x| %>
-    <% sum  += x.transacted_price %>
-  <% end %>
-<p>Average Sale Price(USD) : <%= (sum/@table.size) %></p>
-<p>Average Sale Price(MYR) : <%= ((sum/@table.size) * 4.36).to_i %></p>
-  <br>
-
-</div>
-
-<% if signed_in? %>
-  <% if current_user.role != "admin"%>
-    <%= link_to "Sell", new_item_stock_path(@item) %> |
-  <% else %>
-    <h3>Stocks:</h3>
-    <br>
+  <div class="item-table col-sm-6">
+    <h1 style="margin-top: 0px;">Latest Sales</h1>
+    <hr class="style1">
     <table>
       <tr>
-        <th>Id</th>
-        <th>Username</th>
-        <th>Gender</th>
-        <th>Size</th>
-        <th>Resell Price</th>
-        <th>Closing Date</th>
-        <th></th>
-        <th></th>
+        <th>Sale Price (USD)</th>
+        <th>Sale Price (MYR)</th>
+        <th>Date/Time</th>
       </tr>
-      <% @item.stocks.each do |stock| %>
       <tr>
+        <% @table.first(5).each do |y| %>
+        <td><%= y.transacted_price %></td>
+        <td><%= y.transacted_price_myr %></td>
+        <td><%= y.date_time %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <br>
+  <div class="item-table col-sm-6">
+    <h1 style="margin-top: 0px;">Historical</h1>
+    <hr class="style1">
+
+    <div class="row col-sm-6">
+      <div class="history-title">
+        <% @table.first(1).each do |x| %>
+        <p>
+          # OF SALES :
+        </div>
+        <div class="history-description">
+          <%= @table.size %>
+        </p>
+      </div>
+      <div class="history-title">
+        <p>
+          Price Premium :
+        </p>
+      </div>
+      <div class="history-description">
+        <p><%= (((x.transacted_price - @item.retail_price)/@item.retail_price.to_f) * 100).round(2) %>%</p>
+        <% end %>
+      </div>
+    </div>
+    <% sum = 0 %>
+    <% @table.each do |x| %>
+    <% sum  += x.transacted_price %>
+    <% end %>
+    <div class="row col-sm-6">
+      <div class="history-title">
+        <p>Average Sale Price(USD) :
+        </p>
+      </div>
+      <div class="history-description">
+        <p><%= (sum/@table.size) %></p>
+      </div>
+      <div class="history-title">
+        <p>Average Sale Price(MYR) :
+        </div>
+        <div class="history-description">
+          <%= ((sum/@table.size) * 4.36).to_i %></p>
+
+      </div>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="item-chart col-sm-12">
+
+    <table>
+      <% x = HistoricalTable.uniq.pluck(:model_number) %>
+      <% if x.include?(@item.model_number) %>
+      <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr) %>
+      <% end %>
+
+    </table>
+  </div>
+
+  <% if signed_in? %>
+  <% if current_user.role != "admin"%>
+  <%= link_to "Sell", new_item_stock_path(@item) %>
+  |
+<% else %>
+  <br/>
+  <div class="item-chart col-sm-12">
+
+  <h3>Stocks:</h3>
+  <br>
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Username</th>
+      <th>Gender</th>
+      <th>Size</th>
+      <th>Resell Price</th>
+      <th>Closing Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @item.stocks.each do |stock| %>
+    <tr>
       <td><%= stock.id %></td>
       <td><%= stock.user.username %></td>
       <td><%= stock.gender %></td>
@@ -211,29 +265,53 @@
   <%= link_to 'Edit', edit_item_path(@item) %> |
 
   <% end %>
-<% end %>
-<%= link_to 'Back', root_path %>
-<br><br><br>
+  <% end %>
+  <%= link_to 'Back', root_path %>
+  <br><br><br>
 
-<style>
-select#soflow, select#soflow-color {
-   -webkit-appearance: button;
-   -webkit-border-radius: 2px;
-   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-   -webkit-padding-end: 20px;
-   -webkit-padding-start: 2px;
-   -webkit-user-select: none;
-   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
-   background-position: 97% center;
-   background-repeat: no-repeat;
-   border: 1px solid #AAA;
-   color: #555;
-   font-size: inherit;
-   margin: 20px;
-   overflow: hidden;
-   padding: 10px 10px;
-   text-overflow: ellipsis;
-   white-space: nowrap;
-   width: 100px;
-}
-</style>
+  <style>
+    select#soflow,
+    select#soflow-color {
+      -webkit-appearance: button;
+      -webkit-border-radius: 2px;
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      -webkit-padding-end: 20px;
+      -webkit-padding-start: 2px;
+      -webkit-user-select: none;
+      background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+      background-position: 97% center;
+      background-repeat: no-repeat;
+      border: 1px solid #AAA;
+      color: #555;
+      font-size: 14px;
+      overflow: hidden;
+      padding: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100px;
+    }
+
+    canvas {
+      padding-left: 65px;
+    }
+
+    .history-title {
+      font-size: 20px;
+
+    }
+
+    .history-description {
+      font-weight: bold;
+      font-size: 35px;
+      color: #41ad33;
+    }
+
+    .fa-bar-chart {
+      color: #41ad33;
+    }
+
+    .fa-certificate {
+      color: #0091b0;
+    }
+
+  </style>

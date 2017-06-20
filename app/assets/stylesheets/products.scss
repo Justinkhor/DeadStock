@@ -204,9 +204,17 @@ body {
 	}
 
 	&__view {
-		color: $font-color;
-		background: $light-gray;
+		color: white;
+    background: #0091b0;
 
-		&:hover { background: lighten($light-gray, 10%); }
+		&:hover { background: lighten(#0091b0, 10%); }
 	}
+}
+
+.product-up {
+	color: #41ad33;
+}
+
+.product-up-2 {
+	color: #41ad33;
 }

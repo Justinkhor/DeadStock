@@ -97,6 +97,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def get_insta_tag
+    response = RestClient.get("https://api.instagram.com/v1/tags/{tag-name}?access_token=ACCESS-TOKEN")
+    result = JSON.parse(response.body)
+
+    @pokemon_url = result["sprites"]["front_default"]
+    @pokemon_name = result["name"]
+    @pokemon_no = result["id"]
+    @pokemon_type = result["types"][0]["type"]["name"]
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
