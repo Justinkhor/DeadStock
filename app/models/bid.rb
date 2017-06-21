@@ -1,10 +1,12 @@
 class Bid < ApplicationRecord
   belongs_to :user
   belongs_to :stock
-  validate :check_chosen_bid
+  validate :check_chosen_bid, on: :buy_process
 
   def check_chosen_bid
-    return if self.chosen_bid == false
-    errors.add(:chosen_bid, "You are the highest bidder, stop trying!")
+    return if self.chosen_bid == true
+    errors.add(:chosen_bid, "highest bidder!")
+    byebug
+    puts "asdf"
   end
 end

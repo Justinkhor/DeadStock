@@ -23,12 +23,16 @@ class BidsController < ApplicationController
 
   def create
     @item = Item.find(params[:item_id])
-    @stock = @item.stocks.order('resell_price DESC').last
+    @stock = @item.stocks.where(sold: false).order('resell_price DESC').last
 		@bid = current_user.bids.new(bid_params)
     @bid.stock_id = @stock.id
     # @bid.item = @item
     if params[:buy]
-      if @bid.save
+      if @bid.save(context: :buy_process)
+        @bid.chosen_bid = false
+        @bid.bought = true
+        @bid.save
+        @stock.sold = true
         # @host = User.find(@item.user_id)
         #     # BidMailer.bid_email(current_user, @host, @bid.item.id, @bid.id).deliver_later
         #     BidJob.perform_later(current_user, @host, @bid.item.id, @bid.id)
@@ -45,7 +49,7 @@ class BidsController < ApplicationController
          redirect_to item_path(@item), notice: "Might as well buy now?"
       else
         expired_bid
-         @bid.chosen_bid = true
+        byebug
          @bid.save
          redirect_to item_path(@item), notice: "Congratulations on being the highest bidder at the moment!"
       end
@@ -56,7 +60,6 @@ class BidsController < ApplicationController
   end
 
   def destroy
-    byebug
     @bid = Bid.find(params[:id])
     @bid.destroy
     redirect_to @bid.user
@@ -93,7 +96,7 @@ class BidsController < ApplicationController
 
   private
 		def bid_params
-			params.require(:bid).permit(:bidding_price, :gender, :size, :stock_id, :user_id)
+			params.require(:bid).permit(:bidding_price, :gender, :size, :chosen_bid, :payment_made, :bought, :stock_id, :user_id)
 		end
 
 end

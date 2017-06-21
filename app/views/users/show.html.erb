@@ -20,13 +20,17 @@
   <tr>
     <th>Item Name</th>
     <th>Bid Price</th>
+    <th>Chosen Bid?</th>
+    <th>Bought?</th>
   </tr>
 <% @bids.each do |bid| %>
-<tr>
-  <td><%= link_to bid.stock.item.name, bid.stock.item %></td>
-  <td><%= bid.bidding_price %>
-<% end %>
-</tr>
+  <tr>
+    <td><%= link_to bid.stock.item.name, bid.stock.item %></td>
+    <td><%= bid.bidding_price %></td>
+    <td><%= bid.chosen_bid %></td>
+    <td><%= bid.bought %></td>
+    <% end %>
+  </tr>
 </table>
 
 <br>
