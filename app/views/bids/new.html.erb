@@ -13,7 +13,7 @@
 
     <div class="field">
       <%= f.label :size %>
-      <%= f.select :size, ['6', '7', '8', '9', '10', '11', '12', '13', '14'] %>
+      <%= f.number_field :size, value: @stock.size, readonly: true %>
     </div>
 
     <div class="field">
@@ -59,7 +59,7 @@
 
     <div class="field">
       <%= f.label :size %>
-      <%= f.select :size, ['6', '7', '8', '9', '10', '11', '12', '13', '14'] %>
+      <%= f.number_field :size, value: @stock.size, readonly: true %>
     </div>
 
     <br>

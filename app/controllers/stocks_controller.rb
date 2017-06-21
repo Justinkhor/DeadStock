@@ -63,7 +63,7 @@ class StocksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_params
 
-      params.require(:stock).permit(:gender, :size, :resell_price, :closing_date, :user_id, :item_id)
+      params.require(:stock).permit(:gender, :size, :resell_price, :closing_date, :sold, :user_id, :item_id)
 
     end
 
