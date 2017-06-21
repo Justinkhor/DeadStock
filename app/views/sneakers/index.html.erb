@@ -3,7 +3,7 @@
   <p class="lead">Buy and sell authentic sneakers online</p>
   <br/>
   <form>
-    <input type="text-search" name="search" placeholder="Search for brand, color etc.">
+    <input type="text-search" name="search" placeholder="Search for brand, color etc." style="width: 390px;">
   </form>
 </div>
 <div class="row">
@@ -117,7 +117,8 @@
 
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
-              <p class="product-grid__description"><%= i.model_number %></p>
+              <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
 
               <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
               <span class="product-up">
@@ -181,7 +182,14 @@
           <span class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></span>
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
+<<<<<<< Updated upstream
               <p class="product-grid__description"><%= i.model_number %></p>
+=======
+              <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
+
+              <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
+>>>>>>> Stashed changes
               <span class="product-up">
                 RM 1090
               </span>
@@ -233,7 +241,14 @@
               <%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
             <div class="product-grid__extend-wrapper">
               <div class="product-grid__extend">
+<<<<<<< Updated upstream
                 <p class="product-grid__description"><%= i %></p>
+=======
+                <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
+
+                <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
+>>>>>>> Stashed changes
                 <span class="product-up">
                   RM 1090
                 </span>
@@ -256,7 +271,15 @@
       </div>
     </div>
   </div>
+<<<<<<< Updated upstream
 </div>
+=======
+
+<br />
+<br />
+<br />
+<br />
+>>>>>>> Stashed changes
 
 <style>
   .row {
