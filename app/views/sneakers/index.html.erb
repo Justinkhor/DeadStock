@@ -133,9 +133,12 @@
                 ▼ <%= diff.to_i %>
               </span>
               <% end %>
+
               <br />
               <br />
-              <a class="product-grid__btn product-grid__view">
+
+              <a class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
+
                 <i class="fa fa-eye"></i>
                 View more</a>
 
@@ -260,6 +263,7 @@
                   RM<%= table[0].transacted_price_myr.to_i %>
                 </span>
                 <span class="product-up-2">
+
                   ▲ +<%= diff.to_i %>
                 </span>
               <% else %>
@@ -275,6 +279,7 @@
                 <a class="product-grid__btn product-grid__view">
                   <i class="fa fa-eye"></i>
                   View more</a>
+
                 </div>
               </div>
             </div>

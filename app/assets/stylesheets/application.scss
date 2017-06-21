@@ -54,6 +54,23 @@ hr.style1{
 
 }
 
+#jumbo-about {
+ background-image: url("http://assets.nydailynews.com/polopoly_fs/1.3108684.1493324583!/img/httpImage/image.jpg_gen/derivatives/article_750/94026668.jpg");
+ background-position: top;
+ background-repeat: no-repeat;
+ background-size: cover;
+ background-color: #000;
+ height: 600px;
+}
+
+#jumbo-about h2 {
+  color: #f24537;
+}
+#jumbo-about h4 {
+  color: white;
+  padding: 0px 100px 0px 100px;
+}
+
 #jumbo-watch {
  background-image: url("https://static.pexels.com/photos/23969/pexels-photo.jpg");
 }
