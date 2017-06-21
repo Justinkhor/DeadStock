@@ -10,13 +10,15 @@
     <span class="fa fa-bar-chart" aria-hidden="true"></span>
 <span>
       TICKER:
-      <%= @item.model_number %> |
+      <strong><%= @item.model_number %></strong>
     </span>
+    <span style="padding-left:10px; padding-right:10px;"> | </span>
     <span class="fa fa-certificate" aria-hidden="true"></span>
     <span>
-       CONDITION: DEADSTOCK
+       CONDITION: <strong>DEADSTOCK</strong>
     </span>
   </div>
+  <br />
   <br />
   <div class="row">
     <div class="item-options col-sm-3">
@@ -37,7 +39,7 @@
         LAST SALE
       </p>
       <p class="value">
-      RM <%= x.transacted_price_myr %>
+      RM <%= x.transacted_price_myr.to_i %>
       </p>
       <% end %>
 
@@ -48,10 +50,10 @@
         LOWEST ASK
       </p>
       <% if !@item.stocks.empty? && @stock != nil %>
-      <div class="inner-options col-sm-6">
-        RM<%= @stock.resell_price %>
+      <div class="value col-sm-6">
+        RM <%= @stock.resell_price %>
       </div>
-      <div class="inner-options col-sm-6">
+      <div class="value col-sm-6">
       <% if @stock.bids.find_by(chosen_bid: true, user_id: current_user.id)   %>
             <p> HIGHEST BIDDER! </p>
           <% else %>
@@ -71,16 +73,16 @@
       </p>
       <% if @stock != nil %>
         <% if !@stock.bids.empty? %>
-          <div class="inner-options col-sm-6">
+          <div class="value col-sm-6">
             RM<%=  @stock.bids.order('bidding_price ASC').last.bidding_price %>
           </div>
         <% else %>
-          <div class="inner-options col-sm-6">
+          <div class="sorry col-sm-6">
             THERE ARE NO BIDS AT THE MOMENT.
           </div>
         <% end %>
       <% end %>
-      <div class="inner-options col-sm-6">
+      <div class="value col-sm-6">
       <%= button_to "SELL", new_item_stock_path(@item), class:"myButton2", method: "get"%>
     </div>
   </div>
@@ -111,8 +113,8 @@
   <div class="item-description col-sm-4">
     <p>
       <strong>RETAIL PRICE:
-      </strong><%= @item.retail_price %>
-      (RM<%= (@item.retail_price * 4.36).to_i %>)
+      </strong><%= @item.retail_price %> USD
+      (RM <%= (@item.retail_price * 4.36).to_i %>)
     </p>
   </div>
   <div class="item-description col-sm-4">
@@ -124,8 +126,10 @@
   <br />
   <br />
   <br>
-  <div class="item-table col-sm-6">
-    <h1 style="margin-top: 20px;">Latest Sales</h1>
+  <div class="row">
+    <div class="item-table col-sm-6">
+    <h1 class="item-title" style="margin-top: 20px;"><i class="fa fa-btc" aria-hidden="true"></i>
+<strong>LATEST SALES</strong></h1>
     <hr class="style1">
     <table>
       <tr>
@@ -141,67 +145,73 @@
       </tr>
       <% end %>
     </table>
+    <br />
+    <br />
+    <h1 class="item-title" style="margin-top: 20px;"><i class="fa fa-area-chart" aria-hidden="true"></i>
+<strong>SALES CHART</strong></h1>
+    <hr class="style1">
+    <table>
+      <% x = HistoricalTable.uniq.pluck(:model_number) %>
+      <% if x.include?(@item.model_number) %>
+      <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr), width: "625px",height: "200px" %>
+      <% end %>
+
+    </table>
   </div>
 
   <br>
   <div class="item-table col-sm-6">
-    <h1 style="margin-top: 0px;">Historical</h1>
+    <h1 class="item-title" style="margin-top: 0px;"><i class="fa fa-tachometer" aria-hidden="true"></i>
+<strong>HISTORICAL</strong></h1>
     <hr class="style1">
 
-    <div class="row col-sm-6">
       <div class="history-title">
         <% @table.first(1).each do |x| %>
         <p>
-          # OF SALES :
+          <strong># of Sales</strong>
         </div>
         <div class="history-description">
           <%= @table.size %>
         </p>
       </div>
+      <hr class="style1">
       <div class="history-title">
-        <p>
-          Price Premium :
-        </p>
+        <span>
+         <strong>Price Premium</strong>
+       </span>
+        <div style="font-size: 10px;">(Over Original Retail Price)</div>
       </div>
       <div class="history-description">
         <p><%= (((x.transacted_price - @item.retail_price)/@item.retail_price.to_f) * 100).round(2) %>%</p>
         <% end %>
       </div>
-    </div>
     <% sum = 0 %>
     <% @table.each do |x| %>
     <% sum  += x.transacted_price %>
     <% end %>
-    <div class="row col-sm-6">
+    <hr class="style1">
+
       <div class="history-title">
-        <p>Average Sale Price(USD) :
-        </p>
+        <p><strong>Average Sale Price (USD)</strong></p>
       </div>
       <div class="history-description">
         <p><%= (sum/@table.size) %></p>
       </div>
+      <hr class="style1">
+
       <div class="history-title">
-        <p>Average Sale Price(MYR) :
+        <p><strong>Average Sale Price (MYR)</strong></p>
         </div>
         <div class="history-description">
           <%= ((sum/@table.size) * 4.36).to_i %></p>
-
       </div>
-    </div>
+      <hr class="style1">
   </div>
+</div>
+
 
   <br/>
 
-  <div class="item-chart col-sm-12">
-
-    <table>
-      <% x = HistoricalTable.uniq.pluck(:model_number) %>
-      <% if x.include?(@item.model_number) %>
-      <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr) %>
-      <% end %>
-
-    </table>
-  </div>
 
   <% if signed_in? %>
   <% if current_user.role == "admin"%>
@@ -306,13 +316,13 @@
     }
 
     .history-title {
-      font-size: 20px;
+      font-size: 30px;
 
     }
 
     .history-description {
       font-weight: bold;
-      font-size: 35px;
+      font-size: 40px;
       color: #41ad33;
     }
 
@@ -324,13 +334,34 @@
       color: #0091b0;
     }
 
+    .fa-tachometer {
+      color: #41ad33;
+    }
+
+    .fa-area-chart {
+      color: #41ad33;
+    }
+
+    .fa-btc {
+      color: #41ad33;
+    }
+
     .sorry {
       font-size: 15px;
     }
 
     .value {
-      font-size: 20px;
+      font-size: 30px;
       font-weight: bold;
+      font-family: 'Source Sans Pro';
+    }
+
+    table {
+      margin-left: 60px;
+    }
+
+    .item-title {
+      font-family: 'Source Sans Pro';
     }
 
   </style>

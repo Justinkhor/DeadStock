@@ -7,9 +7,8 @@
   </form>
 </div>
 <div class="row">
-    <div class="index_graph_row">
-      <div class="col-sm-1" style="padding: 80px;">
-      </div>
+  <div class="index_graph_row">
+    <div class="col-sm-1" style="padding: 80px;"></div>
     <div class="index_graph col-sm-3" style="padding: 0px;">
       <div class="index_description col-sm-3" style="padding: 0px;">
         <div class="index-title">
@@ -35,7 +34,9 @@
     <div class="index_graph col-sm-3" style="padding: 0px;">
       <div class="index_description col-sm-3" style="padding: 0px;">
         <div class="index-title">
-          <strong>NIKE INDEX</strong>
+          <strong>NIKE</strong>
+          <br/>
+          <strong>INDEX</strong>
         </div>
         <div class="index-number" style="color: #ff5a5f;" style="padding: 0px;">
           -1%
@@ -51,7 +52,7 @@
         </div>
       </div>
       <div class="index_description col-sm-2">
-        <%= area_chart IndexTable.group(:index_date).sum(:nike_index), width: "246px",height: "150px" %>
+        <%= area_chart IndexTable.group(:index_date).sum(:nike_index), width: "246px",height: "150px", colors: ["#ff5a5f", "#666"] %>
       </div>
     </div>
     <div class="index_graph col-sm-3" style="padding: 0px;">
@@ -79,7 +80,6 @@
   </div>
 </div>
 
-
 <h1 style="padding-top: 30px;">
   <strong>Most Popular Items</strong>
 </h1>
@@ -106,14 +106,13 @@
           <% end %>
 
           <span class="product-grid__title"><%= i.name %></span>
-          <span class="product-grid__title"><%= i.color %></span>
+          <span class="product-grid__title-sub"><%= i.color %></span>
 
           <% table = HistoricalTable.where(model_number: i.model_number).order('date_time DESC') %>
           <% diff = table[0].transacted_price_myr - table[1].transacted_price_myr %>
 
-          <span class="product-grid__price_description"># OF SALES</span>
-          <br/>
-          <span class="product-grid__price"><%= table.size %></span>
+          <div class="product-grid__price_description"># OF SALES</div>
+          <div class="product-grid__price"><%= table.size %></div>
 
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
@@ -131,14 +130,14 @@
                 RM<%= table[0].transacted_price_myr.to_i %>
               </span>
               <span class="number_marquee_down">
-                ▼
-                <%= diff.to_i %>
+                ▼ <%= diff.to_i %>
               </span>
               <% end %>
-
-              <span class="product-grid__btn product-grid__view">
+              <br />
+              <br />
+              <a class="product-grid__btn product-grid__view">
                 <i class="fa fa-eye"></i>
-                View more</span>
+                View more</a>
 
             </div>
           </div>
@@ -175,31 +174,49 @@
             <% end %>
           </div>
           <span class="product-grid__title"><%= i.name %></span>
-          <span class="product-grid__title"><%= i.color %></span>
-          <span class="product-grid__price_description">LOWEST ASK</span>
-          <br/>
-          <span class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></span>
+          <span class="product-grid__title-sub"><%= i.color %></span>
+
+          <% table = HistoricalTable.where(model_number: i.model_number).order('date_time DESC') %>
+          <% diff = table[0].transacted_price_myr - table[1].transacted_price_myr %>
+
+          <div class="product-grid__price_description">LOWEST ASK</div>
+          <div class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></div>
+
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
               <p class="product-grid__description"><%= i.model_number %></p>
+
+              <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
               <span class="product-up">
-                RM 1090
+                RM<%= table[0].transacted_price_myr.to_i %>
               </span>
               <span class="product-up-2">
-                ▲ +113
-                <span class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
-                  <i class="fa fa-eye"></i>
-                  View more</span>
+                ▲ +<%= diff.to_i %>
+              </span>
+            <% else %>
+              <span class="number_marquee_down">
+                RM<%= table[0].transacted_price_myr.to_i %>
+              </span>
+              <span class="number_marquee_down">
+                ▼ <%= diff.to_i %>
+              </span>
+              <% end %>
+              <br />
+              <br />
+              <a class="product-grid__btn product-grid__view">
+                <i class="fa fa-eye"></i>
+                View more</a>
               </div>
             </div>
           </div>
-        </div <% end %>
+        </div>
+        <% end %>
         <% end %>
         <% end %>
       </div>
     </div>
   </div>
-
+</div>
 
   <h1>
     <strong>New Highest Bids</strong>
@@ -227,21 +244,37 @@
               <% end %>
             </div>
             <span class="product-grid__title"><%= i.name %></span>
-            <span class="product-grid__title"><%= i.color %></span>
-            <span class="product-grid__price_description">HIGHEST BID</span>
-            <div class="product-grid__price">RM
-              <%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
+            <span class="product-grid__title-sub"><%= i.color %></span>
+
+            <% table = HistoricalTable.where(model_number: i.model_number).order('date_time DESC') %>
+            <% diff = table[0].transacted_price_myr - table[1].transacted_price_myr %>
+
+            <div class="product-grid__price_description">HIGHEST BID</div>
+            <div class="product-grid__price">RM<%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
             <div class="product-grid__extend-wrapper">
               <div class="product-grid__extend">
-                <p class="product-grid__description"><%= i %></p>
+                <p class="product-grid__description"><%= i.model_number %></p>
+
+                <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
                 <span class="product-up">
-                  RM 1090
+                  RM<%= table[0].transacted_price_myr.to_i %>
                 </span>
                 <span class="product-up-2">
-                  ▲ +113
-                  <span class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
-                    <i class="fa fa-eye"></i>
-                    View more</span>
+                  ▲ +<%= diff.to_i %>
+                </span>
+              <% else %>
+                <span class="number_marquee_down">
+                  RM<%= table[0].transacted_price_myr.to_i %>
+                </span>
+                <span class="number_marquee_down">
+                  ▼ <%= diff.to_i %>
+                </span>
+                <% end %>
+                <br />
+                <br />
+                <a class="product-grid__btn product-grid__view">
+                  <i class="fa fa-eye"></i>
+                  View more</a>
                 </div>
               </div>
             </div>
@@ -256,11 +289,20 @@
       </div>
     </div>
   </div>
-</div>
+
 
 <style>
   .row {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
   }
+
+  canvas {
+    padding-right: 20px;
+  }
+
+  .number_marquee_down {
+    color: #ff5a5f;
+  }
+
 </style>
