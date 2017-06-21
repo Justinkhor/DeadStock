@@ -46,7 +46,7 @@ hr.style1{
 }
 
 #jumbo-sneaker {
- background-image: url("http://stockx-assets.imgix.net/headers/home_2.png");
+ background-image: url("http://ward1.com/blog/wp-content/uploads/DSC07398-Edit.jpg");
  background-position: top;
  background-repeat: no-repeat;
  background-size: cover;
@@ -60,6 +60,26 @@ hr.style1{
 
 #jumbo-handbag {
   background-image: url("https://s3-ap-southeast-2.amazonaws.com/nlm-common-prod/vogue/media/file_uploads/2/1/2/0/21231-1.jpg");
+}
+
+.index-number {
+	font-family: proxima-nova,sans-serif;
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: right;
+}
+
+.index-category {
+	font-size: 10px;
+	text-align: right;
+}
+
+.index-title {
+	font-size:15px;
+	font-weight: bold;
+	color: #00bbe3;
+	text-align: right;
 }
 
 input[type=text-search] {
@@ -78,6 +98,7 @@ input[type=text-search] {
 
 body {
   text-align: center;
+	color: black;
 }
 
 table {

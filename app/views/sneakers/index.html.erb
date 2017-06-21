@@ -6,42 +6,84 @@
     <input type="text-search" name="search" placeholder="Search for brand, color etc.">
   </form>
 </div>
-<div class="index_graph_row">
-  <div class="index_graph col-sm-4">
-    <div class="index_description col-sm-6">
-      <h4>
-        6month turnover +11% | Fornightly change +64,565
-      </h4>
+<div class="row">
+    <div class="index_graph_row">
+      <div class="col-sm-1" style="padding: 80px;">
+      </div>
+    <div class="index_graph col-sm-3" style="padding: 0px;">
+      <div class="index_description col-sm-3" style="padding: 0px;">
+        <div class="index-title">
+          <strong>JORDAN INDEX</strong>
+        </div>
+        <div class="index-number" style="color: #41ad33;" style="padding: 0px;">
+          +11%
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          6 month turnover
+        </div>
+        <div class="index-number" style="color: #41ad33; padding: 0px;">
+          +64,565
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          Fortnightly change
+        </div>
+      </div>
+      <div class="index_description col-sm-2">
+        <%= area_chart IndexTable.group(:index_date).sum(:jordan_index), width: "246px", height: "150px" %>
+      </div>
     </div>
-    <div class="index_description col-sm-6">
-      <%= area_chart IndexTable.group(:index_date).sum(:jordan_index), width: "246px", height: "150px" %>
+    <div class="index_graph col-sm-3" style="padding: 0px;">
+      <div class="index_description col-sm-3" style="padding: 0px;">
+        <div class="index-title">
+          <strong>NIKE INDEX</strong>
+        </div>
+        <div class="index-number" style="color: #ff5a5f;" style="padding: 0px;">
+          -1%
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          6 month turnover
+        </div>
+        <div class="index-number" style="color: #ff5a5f;" style="padding: 0px;">
+          -10,545
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          Fortnightly change
+        </div>
+      </div>
+      <div class="index_description col-sm-2">
+        <%= area_chart IndexTable.group(:index_date).sum(:nike_index), width: "246px",height: "150px" %>
+      </div>
     </div>
-  </div>
-  <div class="index_graph col-sm-4">
-    <div class="index_description col-sm-6">
-      <h4>
-        6month turnover -1% | Fornightly change -10,545
-      </h4>
-    </div>
-    <div class="index_description col-sm-6">
-      <%= area_chart IndexTable.group(:index_date).sum(:nike_index), width: "246px",height: "150px" %>
-    </div>
-  </div>
-  <div class="index_graph col-sm-4">
-    <div class="index_description col-sm-6">
-      <h4>
-        6month turnover +9% | Fornightly change +20,182
-      </h4>
-    </div>
-    <div class="index_description col-sm-6">
-      <%= area_chart IndexTable.group(:index_date).sum(:adidas_index), width: "246px",height: "150px", xAxis: {ticks: 'none'} %>
+    <div class="index_graph col-sm-3" style="padding: 0px;">
+      <div class="index_description col-sm-3" style="padding: 0px;">
+        <div class="index-title">
+          <strong>ADIDAS INDEX</strong>
+        </div>
+        <div class="index-number" style="color: #41ad33;" style="padding: 0px;">
+          +9%
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          6 month turnover
+        </div>
+        <div class="index-number" style="color: #41ad33;" style="padding: 0px;">
+          +20,182
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          Fortnightly change
+        </div>
+      </div>
+      <div class="index_description col-sm-2">
+        <%= area_chart IndexTable.group(:index_date).sum(:adidas_index), width: "246px",height: "150px"%>
+      </div>
     </div>
   </div>
 </div>
 
-<h1>
+
+<h1 style="padding-top: 30px;">
   <strong>Most Popular Items</strong>
 </h1>
+
 <hr class="style1">
 <div class="content">
   <!-- content here -->
@@ -158,6 +200,7 @@
     </div>
   </div>
 
+
   <h1>
     <strong>New Highest Bids</strong>
   </h1>
@@ -212,3 +255,12 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<style>
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+</style>
