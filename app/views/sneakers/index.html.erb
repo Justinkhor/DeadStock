@@ -3,45 +3,87 @@
   <p class="lead">Buy and sell authentic sneakers online</p>
   <br/>
   <form>
-    <input type="text-search" name="search" placeholder="Search for brand, color etc.">
+    <input type="text-search" name="search" placeholder="Search for brand, color etc." style="width: 390px;">
   </form>
 </div>
-<div class="index_graph_row">
-  <div class="index_graph col-sm-4">
-    <div class="index_description col-sm-6">
-      <h4>
-        6month turnover +11% | Fornightly change +64,565
-      </h4>
+<div class="row">
+  <div class="index_graph_row">
+    <div class="col-sm-1" style="padding: 80px;"></div>
+    <div class="index_graph col-sm-3" style="padding: 0px;">
+      <div class="index_description col-sm-3" style="padding: 0px;">
+        <div class="index-title">
+          <strong>JORDAN INDEX</strong>
+        </div>
+        <div class="index-number" style="color: #41ad33;" style="padding: 0px;">
+          +11%
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          6 month turnover
+        </div>
+        <div class="index-number" style="color: #41ad33; padding: 0px;">
+          +64,565
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          Fortnightly change
+        </div>
+      </div>
+      <div class="index_description col-sm-2">
+        <%= area_chart IndexTable.group(:index_date).sum(:jordan_index), width: "246px", height: "150px" %>
+      </div>
     </div>
-    <div class="index_description col-sm-6">
-      <%= area_chart IndexTable.group(:index_date).sum(:jordan_index), width: "246px", height: "150px" %>
+    <div class="index_graph col-sm-3" style="padding: 0px;">
+      <div class="index_description col-sm-3" style="padding: 0px;">
+        <div class="index-title">
+          <strong>NIKE</strong>
+          <br/>
+          <strong>INDEX</strong>
+        </div>
+        <div class="index-number" style="color: #ff5a5f;" style="padding: 0px;">
+          -1%
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          6 month turnover
+        </div>
+        <div class="index-number" style="color: #ff5a5f;" style="padding: 0px;">
+          -10,545
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          Fortnightly change
+        </div>
+      </div>
+      <div class="index_description col-sm-2">
+        <%= area_chart IndexTable.group(:index_date).sum(:nike_index), width: "246px",height: "150px", colors: ["#ff5a5f", "#666"] %>
+      </div>
     </div>
-  </div>
-  <div class="index_graph col-sm-4">
-    <div class="index_description col-sm-6">
-      <h4>
-        6month turnover -1% | Fornightly change -10,545
-      </h4>
-    </div>
-    <div class="index_description col-sm-6">
-      <%= area_chart IndexTable.group(:index_date).sum(:nike_index), width: "246px",height: "150px" %>
-    </div>
-  </div>
-  <div class="index_graph col-sm-4">
-    <div class="index_description col-sm-6">
-      <h4>
-        6month turnover +9% | Fornightly change +20,182
-      </h4>
-    </div>
-    <div class="index_description col-sm-6">
-      <%= area_chart IndexTable.group(:index_date).sum(:adidas_index), width: "246px",height: "150px", xAxis: {ticks: 'none'} %>
+    <div class="index_graph col-sm-3" style="padding: 0px;">
+      <div class="index_description col-sm-3" style="padding: 0px;">
+        <div class="index-title">
+          <strong>ADIDAS INDEX</strong>
+        </div>
+        <div class="index-number" style="color: #41ad33;" style="padding: 0px;">
+          +9%
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          6 month turnover
+        </div>
+        <div class="index-number" style="color: #41ad33;" style="padding: 0px;">
+          +20,182
+        </div>
+        <div class="index-category" style="padding: 0px;">
+          Fortnightly change
+        </div>
+      </div>
+      <div class="index_description col-sm-2">
+        <%= area_chart IndexTable.group(:index_date).sum(:adidas_index), width: "246px",height: "150px"%>
+      </div>
     </div>
   </div>
 </div>
 
-<h1>
+<h1 style="padding-top: 30px;">
   <strong>Most Popular Items</strong>
 </h1>
+
 <hr class="style1">
 <div class="content">
   <!-- content here -->
@@ -64,18 +106,18 @@
           <% end %>
 
           <span class="product-grid__title"><%= i.name %></span>
-          <span class="product-grid__title"><%= i.color %></span>
+          <span class="product-grid__title-sub"><%= i.color %></span>
 
           <% table = HistoricalTable.where(model_number: i.model_number).order('date_time DESC') %>
           <% diff = table[0].transacted_price_myr - table[1].transacted_price_myr %>
 
-          <span class="product-grid__price_description"># OF SALES</span>
-          <br/>
-          <span class="product-grid__price"><%= table.size %></span>
+          <div class="product-grid__price_description"># OF SALES</div>
+          <div class="product-grid__price"><%= table.size %></div>
 
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
-              <p class="product-grid__description"><%= i.model_number %></p>
+              <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
 
               <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
               <span class="product-up">
@@ -89,14 +131,17 @@
                 RM<%= table[0].transacted_price_myr.to_i %>
               </span>
               <span class="number_marquee_down">
-                ▼
-                <%= diff.to_i %>
+                ▼ <%= diff.to_i %>
               </span>
               <% end %>
 
-              <span class="product-grid__btn product-grid__view">
+              <br />
+              <br />
+
+              <a class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
+
                 <i class="fa fa-eye"></i>
-                View more</span>
+                View more</a>
 
             </div>
           </div>
@@ -133,30 +178,49 @@
             <% end %>
           </div>
           <span class="product-grid__title"><%= i.name %></span>
-          <span class="product-grid__title"><%= i.color %></span>
-          <span class="product-grid__price_description">LOWEST ASK</span>
-          <br/>
-          <span class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></span>
+          <span class="product-grid__title-sub"><%= i.color %></span>
+
+          <% table = HistoricalTable.where(model_number: i.model_number).order('date_time DESC') %>
+          <% diff = table[0].transacted_price_myr - table[1].transacted_price_myr %>
+
+          <div class="product-grid__price_description">LOWEST ASK</div>
+          <div class="product-grid__price">RM<%= i.stocks.all.order('resell_price DESC').last.resell_price %></div>
+
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
-              <p class="product-grid__description"><%= i.model_number %></p>
+              <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
+              <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
               <span class="product-up">
-                RM 1090
+                RM<%= table[0].transacted_price_myr.to_i %>
               </span>
               <span class="product-up-2">
-                ▲ +113
-                <span class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
-                  <i class="fa fa-eye"></i>
-                  View more</span>
+                ▲ +<%= diff.to_i %>
+              </span>
+            <% else %>
+              <span class="number_marquee_down">
+                RM<%= table[0].transacted_price_myr.to_i %>
+              </span>
+              <span class="number_marquee_down">
+                ▼ <%= diff.to_i %>
+              </span>
+              <% end %>
+              <br />
+              <br />
+              <a class="product-grid__btn product-grid__view">
+                <i class="fa fa-eye"></i>
+                View more</a>
               </div>
             </div>
           </div>
-        </div <% end %>
+        </div>
+        <% end %>
         <% end %>
         <% end %>
       </div>
     </div>
   </div>
+</div>
 
   <h1>
     <strong>New Highest Bids</strong>
@@ -184,21 +248,41 @@
               <% end %>
             </div>
             <span class="product-grid__title"><%= i.name %></span>
-            <span class="product-grid__title"><%= i.color %></span>
-            <span class="product-grid__price_description">HIGHEST BID</span>
-            <div class="product-grid__price">RM
-              <%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
+            <span class="product-grid__title-sub"><%= i.color %></span>
+
+            <% table = HistoricalTable.where(model_number: i.model_number).order('date_time DESC') %>
+            <% diff = table[0].transacted_price_myr - table[1].transacted_price_myr %>
+
+            <div class="product-grid__price_description">HIGHEST BID</div>
+            <div class="product-grid__price">RM<%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
             <div class="product-grid__extend-wrapper">
               <div class="product-grid__extend">
                 <p class="product-grid__description"><%= i %></p>
+                <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
+
+                <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
                 <span class="product-up">
-                  RM 1090
+                  RM<%= table[0].transacted_price_myr.to_i %>
                 </span>
                 <span class="product-up-2">
-                  ▲ +113
-                  <span class="product-grid__btn product-grid__view" href="<%= item_path(i) %>">
-                    <i class="fa fa-eye"></i>
-                    View more</span>
+
+                  ▲ +<%= diff.to_i %>
+                </span>
+              <% else %>
+                <span class="number_marquee_down">
+                  RM<%= table[0].transacted_price_myr.to_i %>
+                </span>
+                <span class="number_marquee_down">
+                  ▼ <%= diff.to_i %>
+                </span>
+                <% end %>
+                <br />
+                <br />
+                <a class="product-grid__btn product-grid__view">
+                  <i class="fa fa-eye"></i>
+                  View more</a>
+
                 </div>
               </div>
             </div>
@@ -212,3 +296,27 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+
+<style>
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  canvas {
+    padding-right: 20px;
+  }
+
+  .number_marquee_down {
+    color: #ff5a5f;
+  }
+
+</style>

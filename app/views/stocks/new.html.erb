@@ -1,6 +1,43 @@
-<h1>Ask</h1><br>
-<div class="container">
-<%= form_for([@item, @stock]) do |f| %>
+<br><br>
+<div class="padding-top"></div>
+<div class="padding-top"></div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class="product col-sm-4">
+  <div class="product-image">
+    <% @item.images.each do |i| %>
+    <%= image_tag i.image.url %>
+    <% end %>
+  </div>
+</div>
+
+<div class="product-details col-sm-4">
+  <%= @item.brand %>
+  <div class="product-title"><%= @item.name %></div>
+  <p class="product-description"><%= @item.color %></p>
+  <div class="product-bid">
+    <% if !@stock.bids.empty? %>
+    <span>
+      HIGHEST BID: RM<%=  @stock.bids.order('bidding_price ASC').last.bidding_price %>
+    </span>
+  <% else %>
+    <span>
+      HIGHEST BID: THERE ARE NO BIDS AT THE MOMENT.
+    </span>
+    <% end %>
+  </div>
+  <span class="product-bid">
+    LOWEST ASK: RM<%= @stock.resell_price %>
+  </span>
+</div>
+
+<div class="tab-content col-sm-2">
+  <h3>Ask</h3>
+  <%= form_for([@item, @stock]) do |f| %>
 
   <div class="field">
     <%= f.label :gender %>
@@ -26,7 +63,46 @@
     <%= f.submit "Ask"%>
   </div>
 
-<% end %>
+  <% end %>
 </div>
 
-<br><br>
+<style>
+
+  h3 {
+    margin-top: 0;
+  }
+
+  body {
+    color: black;
+  }
+
+  .product-title {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .product-details {
+    font-size: 15px;
+  }
+
+  .product-image {
+    height: 200px;
+  }
+
+  img {
+    height: 100%;
+  }
+
+  .product-details {
+    text-align: left;
+  }
+
+  .container {
+    padding-left: 0;
+  }
+
+  .padding-top {
+    padding-top: 50px;
+  }
+
+</style>
