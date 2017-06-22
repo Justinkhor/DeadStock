@@ -86,7 +86,6 @@
       <%= button_to "SELL", new_item_stock_path(@item), class:"myButton2", method: "get"%>
     </div>
   </div>
-</div>
 
   <% if @errors.present? %>
   <p><% @errors.each do |x| %>
@@ -153,7 +152,7 @@
     <table>
       <% x = HistoricalTable.uniq.pluck(:model_number) %>
       <% if x.include?(@item.model_number) %>
-      <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr), width: "625px",height: "200px" %>
+      <%= area_chart HistoricalTable.where(model_number: @item.model_number).group(:date_time).maximum(:transacted_price_myr), width: "595px",height: "200px" %>
       <% end %>
 
     </table>
@@ -280,6 +279,7 @@
       <% end %>
     </table>
     <br>
+  </div>
 
 
   <%= link_to 'Edit', edit_item_path(@item) %> |

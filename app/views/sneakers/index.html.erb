@@ -3,7 +3,7 @@
   <p class="lead">Buy and sell authentic sneakers online</p>
   <br/>
   <form>
-    <input type="text-search" name="search" placeholder="Search for brand, color etc.">
+    <input type="text-search" name="search" placeholder="Search for brand, color etc." style="width: 390px;">
   </form>
 </div>
 <div class="row">
@@ -116,7 +116,8 @@
 
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
-              <p class="product-grid__description"><%= i.model_number %></p>
+              <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
 
               <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
               <span class="product-up">
@@ -187,8 +188,8 @@
 
           <div class="product-grid__extend-wrapper">
             <div class="product-grid__extend">
-              <p class="product-grid__description"><%= i.model_number %></p>
-
+              <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
               <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
               <span class="product-up">
                 RM<%= table[0].transacted_price_myr.to_i %>
@@ -256,7 +257,9 @@
             <div class="product-grid__price">RM<%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
             <div class="product-grid__extend-wrapper">
               <div class="product-grid__extend">
-                <p class="product-grid__description"><%= i.model_number %></p>
+                <p class="product-grid__description"><%= i %></p>
+                <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
+<%= i.model_number %></p>
 
                 <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
                 <span class="product-up">
@@ -294,6 +297,12 @@
       </div>
     </div>
   </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
 
 
 <style>

@@ -20,6 +20,9 @@
 @import "braintree";
 @import "products";
 @import "navbar";
+@import "footer";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
+
 
 hr.style1{
 	border-top: 1px solid #8c8b8b;
@@ -93,7 +96,7 @@ hr.style1{
 }
 
 .index-title {
-	font-size:15px;
+	font-size: 18px;
 	font-weight: bold;
 	color: #00bbe3;
 	text-align: right;

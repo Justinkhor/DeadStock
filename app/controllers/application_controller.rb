@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   def new
       @user = User.new  # = user_from_params
+      @item = Item.all
       # render template: "users/new"
   end
 end
