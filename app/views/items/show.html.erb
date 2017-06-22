@@ -59,12 +59,12 @@
       </div>
       <div class="value col-sm-6" id="buy_box">
         <% if @stock.bids.find_by(chosen_bid: true, user_id: current_user.id) %>
-          <p id="highbid"> HIGHEST BIDDER! </p>
+          <p id="highbid" class="sorry"> HIGHEST BIDDER! </p>
           <div id="bid_stock_form" style="display:none">
             <%= button_to "BUY", new_item_stock_bid_path(@item, @stock), class:"myButton", method: "get"%>
           </div>
         <% else %>
-          <p id="highbid" style="display:none"> HIGHEST BIDDER! </p>
+          <p id="highbid" class ="sorry" style="display:none"> HIGHEST BIDDER! </p>
           <div id="bid_stock_form">
             <%= button_to "BUY", new_item_stock_bid_path(@item, @stock), class:"myButton", method: "get"%>
           </div>
@@ -88,7 +88,7 @@
             RM<%=  @stock.bids.order('bidding_price ASC').last.bidding_price %>
           </div>
         <% else %>
-          <div class="sorry col-sm-6">
+          <div class="value col-sm-6" id='highestbid'>
             THERE ARE NO BIDS AT THE MOMENT.
           </div>
         <% end %>
@@ -358,7 +358,7 @@
     }
 
     .sorry {
-      font-size: 15px;
+      font-size: 18px;
     }
 
     .value {

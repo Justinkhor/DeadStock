@@ -16,6 +16,7 @@
   </div>
 </div>
 
+
 <div class="product-details col-sm-4">
   <%= @item.brand %>
   <div class="product-title"><%= @item.name %></div>
@@ -32,7 +33,11 @@
     <% end %>
   </div>
   <span class="product-bid">
-    LOWEST ASK: RM<%= @stock.resell_price %>
+    <% if !@item.stocks.empty? %>
+    LOWEST ASK: RM<%= @item.stocks.where(sold: false).order('resell_price DESC').last.resell_price%>
+    <% else %>
+    LOWEST ASK: THERE IS NO STOCK!
+    <% end %>
   </span>
 </div>
 

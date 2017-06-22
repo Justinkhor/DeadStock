@@ -15,7 +15,7 @@ class StocksController < ApplicationController
     #   end
     # else
       if @stock.save
-        redirect_to item_stock_path(@item, @stock), notice: "You have successfully created a stock."
+        redirect_to item_path(@item, @stock), notice: "You have added a stock."
       else
         redirect_to item_path(@item), notice: "Failed to create stock."
     end

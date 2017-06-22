@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
   def show
     @stocks = Stock.select('min(resell_price) AS min_price, size').where(sold: false, item_id: @item.id).group(:size).each {|x| p x.min_price}
     @stocks = @stocks.sort_by {|obj| obj.size}
-    if !@item.stocks.empty?
+    if !@stocks.empty?
     @stock = @item.stocks.where(sold: false, size: @stocks[0].size).order('resell_price DESC').last
   end
     @table = HistoricalTable.where(model_number: @item.model_number).order('date_time DESC')

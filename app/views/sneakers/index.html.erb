@@ -232,10 +232,9 @@
     <div class="product-grid product-grid--flexbox">
       <div class="product-grid__wrapper">
         <!-- Product list start here -->
-
         <% @item.each do |i| %>
         <% if i.category == "Sneakers" && !i.stocks.empty? %>
-        <% i.stocks.each do |y| %>
+        <% y = i.stocks.order('size ASC').first %>
         <% if !y.bids.empty?%>
         <!-- Single product -->
         <div class="product-grid__product-wrapper">
@@ -287,7 +286,6 @@
           </div>
           <% end %>
 
-          <% end %>
           <% end %>
           <% end %>
           <% end %>

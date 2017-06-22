@@ -77,7 +77,8 @@ class BidsController < ApplicationController
   end
 
   def lowest_ask
-    @stock.resell_price
+     @item.stocks.where(sold: false).order('resell_price DESC').last.resell_price
+
   end
 
   def expired_bid
