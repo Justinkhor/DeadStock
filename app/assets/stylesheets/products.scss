@@ -127,19 +127,24 @@ body {
 	}
 
 	&__price {
-		font-family: proxima-nova,sans-serif;
+		font-family: 'Source Sans Pro',sans-serif;
 		color: black;
 		font-weight: bold;
+<<<<<<< front-end-4
 		font-size: 15px;
+=======
+		font-size: 40px;
+>>>>>>> master
 		letter-spacing: .4px;
 	}
 
 	&__price_description {
-		font-family: proxima-nova,sans-serif;
+		font-family: 'Source Sans Pro',sans-serif;
 		color: black;
 		font-weight: bold;
 		font-size: 13px;
 		letter-spacing: .4px;
+		margin-bottom: -15px;
 	}
 
 
@@ -153,7 +158,7 @@ body {
 	&__extend {
 		display: none;
 		position: absolute;
-		padding: 0 4rem 4rem 4rem;
+		padding: 0 9rem 2rem 9rem;
 		margin: .4375rem -1rem 0;
 		box-shadow: $product-box-shadow;
 		background: #fff;
@@ -182,7 +187,6 @@ body {
 
 	// buttons
 	&__btn {
-		display: inline-block;
 		font-size: .875em;
 		color: $font-color;
 		background: $light-gray;

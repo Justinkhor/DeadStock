@@ -1,37 +1,4 @@
-<<<<<<< Updated upstream
-<h1>Ask</h1><br>
-<div class="container">
-<%= form_for([@item, @stock]) do |f| %>
-
-  <div class="field">
-    <%= f.label :gender %>
-    <%= f.select :gender, ['Male', 'Female'] %>
-  </div>
-
-  <div class="field">
-    <%= f.label :size %>
-    <%= f.select :size, ['6', '7', '8', '9', '10', '11', '12', '13', '14'] %>
-  </div>
-
-  <div class="field">
-    <%= f.label :resell_price %>
-    <%= f.number_field :resell_price %>
-  </div>
-
-  <div class="field">
-    <%= f.label :closing_date %>
-    <%= f.date_field :closing_date, min: Date.today.strftime('%Y-%m-%d'), max: (Date.today + 30).strftime('%Y-%m-%d')%>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Ask"%>
-  </div>
-
-<% end %>
-</div>
-
 <br><br>
-=======
 <div class="padding-top"></div>
 <div class="padding-top"></div>
 
@@ -139,4 +106,3 @@
   }
 
 </style>
->>>>>>> Stashed changes

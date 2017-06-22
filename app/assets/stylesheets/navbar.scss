@@ -10,7 +10,8 @@
 *  OPAQUE NAVBAR SECTION
 ***********************************************************************/
 .opaque-navbar {
-    background-color: rgba(0,0,0,0.0);
+    font-size: 16px;
+    background-color: black;
     height: 40px;
     border-bottom: 0px;
     transition: background-color .5s ease 0s;
@@ -56,7 +57,7 @@ color: #41ad33;
 font-size: 18px;
 font-weight: 600;
 width: 150%;
-font-family: proxima-nova,sans-serif;
+font-family: 'Source Sans Pro',sans-serif;
 overflow: hidden;
 border: 1px solid black;
 background: black;
@@ -104,7 +105,7 @@ background: black;
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: transparent;
+    background-color: black;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
