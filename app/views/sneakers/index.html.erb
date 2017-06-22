@@ -257,9 +257,7 @@
             <div class="product-grid__price">RM<%= y.bids.order('bidding_price ASC').last.bidding_price %></div>
             <div class="product-grid__extend-wrapper">
               <div class="product-grid__extend">
-                <p class="product-grid__description"><%= i %></p>
-                <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span>
-<%= i.model_number %></p>
+                <p class="product-grid__description"><span class="fa fa-bar-chart" aria-hidden="true"></span><%= i.model_number %></p>
 
                 <% if table[0].transacted_price_myr > table[1].transacted_price_myr %>
                 <span class="product-up">
