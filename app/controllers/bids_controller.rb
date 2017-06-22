@@ -17,13 +17,14 @@ class BidsController < ApplicationController
   def new
     @user = current_user
     @item = Item.find(params[:item_id])
-    @stock = @item.stocks.order('resell_price DESC').last
+    @stock = Stock.find(params[:stock_id])
+    @stocks = @item.stocks.where(sold: false).select(:size).order('resell_price DESC')
     @bid = Bid.new
   end
 
   def create
     @item = Item.find(params[:item_id])
-    @stock = @item.stocks.where(sold: false).order('resell_price DESC').last
+    @stock = Stock.find(params[:stock_id])
 		@bid = current_user.bids.new(bid_params)
     @bid.stock_id = @stock.id
     # @bid.item = @item
@@ -33,6 +34,7 @@ class BidsController < ApplicationController
         @bid.bought = true
         @bid.save
         @stock.sold = true
+        @stock.save
         # @host = User.find(@item.user_id)
         #     # BidMailer.bid_email(current_user, @host, @bid.item.id, @bid.id).deliver_later
         #     BidJob.perform_later(current_user, @host, @bid.item.id, @bid.id)
@@ -49,7 +51,6 @@ class BidsController < ApplicationController
          redirect_to item_path(@item), notice: "Might as well buy now?"
       else
         expired_bid
-        byebug
          @bid.save
          redirect_to item_path(@item), notice: "Congratulations on being the highest bidder at the moment!"
       end
@@ -62,6 +63,8 @@ class BidsController < ApplicationController
   def destroy
     @bid = Bid.find(params[:id])
     @bid.destroy
+    @stock.sold = false
+    @stock.save
     redirect_to @bid.user
   end
 

@@ -18,8 +18,6 @@ class BraintreeController < ApplicationController
       }
      )
       if result.success?
-        @stock.sold = true
-        @stock.save
         @bid.payment_made = true
         @bid.save
         redirect_to user_path(current_user), notice: "Transaction successful!"

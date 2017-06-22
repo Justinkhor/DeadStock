@@ -27,9 +27,13 @@
           SIZE
         </p>
         <select id="soflow">
-          <% @item.stocks.order('size ASC').each do |stock| %>
+          <% if @stock != nil %>
+            <% @stocks.each do |stock| %>
             <option><%= stock.size %></option>
-          <%end%>
+            <%end%>
+          <% else %>
+          <option><%= "-" %></option>
+          <% end %>
         </select>
       </div>
     </div>
@@ -45,19 +49,26 @@
 
     </div>
     <div class="item-options col-sm-3">
-
       <p>
         LOWEST ASK
       </p>
       <% if !@item.stocks.empty? && @stock != nil %>
-      <div class="value col-sm-6">
-        RM <%= @stock.resell_price %>
+
+      <div class="value col-sm-6" id="sell_price">
+        RM<%= @stock.resell_price %>
       </div>
-      <div class="value col-sm-6">
-      <% if @stock.bids.find_by(chosen_bid: true, user_id: current_user.id)   %>
-            <p> HIGHEST BIDDER! </p>
-          <% else %>
-          <%= button_to "BUY", new_item_stock_bid_path(@item, @item.stocks.order('resell_price DESC').last), class:"myButton", method: "get"%>
+      <div class="value col-sm-6" id="buy_box">
+        <% if @stock.bids.find_by(chosen_bid: true, user_id: current_user.id) %>
+          <p id="highbid"> HIGHEST BIDDER! </p>
+          <div id="bid_stock_form" style="display:none">
+            <%= button_to "BUY", new_item_stock_bid_path(@item, @stock), class:"myButton", method: "get"%>
+          </div>
+        <% else %>
+          <p id="highbid" style="display:none"> HIGHEST BIDDER! </p>
+          <div id="bid_stock_form">
+            <%= button_to "BUY", new_item_stock_bid_path(@item, @stock), class:"myButton", method: "get"%>
+          </div>
+
         <% end %>
       </div>
 
@@ -73,7 +84,7 @@
       </p>
       <% if @stock != nil %>
         <% if !@stock.bids.empty? %>
-          <div class="value col-sm-6">
+          <div class="value col-sm-6" id="highestbid">
             RM<%=  @stock.bids.order('bidding_price ASC').last.bidding_price %>
           </div>
         <% else %>
@@ -365,3 +376,64 @@
     }
 
   </style>
+  <script>
+  $(document).ready(function(){
+    $('#soflow').change(function(){
+      $.ajax({
+        url: "<%= get_stock_path %>",
+        method: "post",
+        data: {
+          size: $(this).val(),
+          item_id: "<%= @item.id %>",
+          user_id: "<%= current_user.id %>"
+        },
+        success: function(data){
+          console.log(data)
+          stock = data["stock"]
+          winner = data["winner"]
+          bid = data["bid"]
+
+          document.getElementById("sell_price").innerHTML = "RM" + stock.resell_price;
+          if(winner){
+            // show highest bid
+            $('#highbid').show()
+            // remove the buy button
+            $('#bid_stock_form').hide()
+
+            console.log("winner")
+          } else {
+            // hide highest bid
+            $('#highbid').hide()
+            $('#bid_stock_form').show()
+            // show buy button & edit path as needed
+            document.getElementById("bid_stock_form").innerHTML = ("<form class='button_to' method='get' action='/items/" + stock.item_id +"/stocks/" + stock.id + "/bids/new'><input class='myButton' type='submit' value='BUY'></form>")
+            console.log("loser")
+          }
+          console.log("bid")
+          if(bid){
+            document.getElementById("highestbid").innerHTML = "RM" + bid.bidding_price
+          } else {
+            document.getElementById("highestbid").innerHTML = "NO BIDS YET"
+          }
+        }
+      })
+    });
+  });
+  // function myFunction() {
+  //     var x = document.getElementById("soflow").value;
+  //     var box = []
+  //
+  //     <%# @box.each do |stuff| %>
+  //       box.push(<%#= stuff.attributes.to_json.html_safe %>)
+  //     <%# end %>
+  //     for (i = 0; i < box.length; i++) {
+  //         console.log(box[i].size)
+  //         console.log(x)
+  //         if(box[i].size == x){
+  //           console.log(box[i].resell_price)
+  //           document.getElementById("sell_price").innerHTML = "RM" + box[i].resell_price;
+  //         }
+  //     }
+  //     // document.getElementById("sell_price").innerHTML = "RM" + test.resell_price;
+  // }
+  </script>

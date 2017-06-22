@@ -27,11 +27,16 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @stock = @item.stocks.where(sold: false).order('resell_price DESC').last
+    @stocks = Stock.select('min(resell_price) AS min_price, size').where(sold: false, item_id: @item.id).group(:size).each {|x| p x.min_price}
+    @stocks = @stocks.sort_by {|obj| obj.size}
+    @stock = @item.stocks.where(sold: false, size: @stocks[0].size).order('resell_price DESC').last
     @table = HistoricalTable.where(model_number: @item.model_number).order('date_time DESC')
-    # @bid = @item.bids.new
-    # @errors = @bid.errors.full_messages
-    # @stock = @item.stocks.find(stock_params)
+    # @box = []
+    # @stocks.each do |shoe|
+    #   @box << Stock.where(sold: false, size: shoe.size).order('resell_price DESC').last
+    # end
+    # @box = @box.sort_by {|obj| obj.size}
+    # @stock = @box.first
   end
 
   # GET /items/new
@@ -97,16 +102,21 @@ class ItemsController < ApplicationController
     end
   end
 
-  def get_insta_tag
-    response = RestClient.get("https://api.instagram.com/v1/tags/{tag-name}?access_token=ACCESS-TOKEN")
-    result = JSON.parse(response.body)
-
-    @pokemon_url = result["sprites"]["front_default"]
-    @pokemon_name = result["name"]
-    @pokemon_no = result["id"]
-    @pokemon_type = result["types"][0]["type"]["name"]
+  def getstock
+    @item = Item.find(params[:item_id])
+    @stock = @item.stocks.where(size: params[:size]).order('resell_price DESC').last
+    @bid = @stock.bids.order('bidding_price ASC').last
+    if @stock.bids.find_by(chosen_bid: true, user_id: current_user.id)
+      winner = true
+    else
+      winner = false
+    end
+    respond_to do |format|
+      format.json {
+         render json: {"stock": @stock, "winner": winner, "bid": @bid}
+      }
+    end
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

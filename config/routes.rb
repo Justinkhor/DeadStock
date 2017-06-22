@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   get "/watches" => "watches#index"
   get "/handbags" => "handbags#index"
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
+  post "/get_stock" => "items#getstock", as: "get_stock"
   get "/about" => "about#index"
+
 
   resources :items do
     resources :stocks do
