@@ -6,7 +6,5 @@ class Bid < ApplicationRecord
   def check_chosen_bid
     return if self.chosen_bid == true
     errors.add(:chosen_bid, "highest bidder!")
-    byebug
-    puts "asdf"
   end
 end

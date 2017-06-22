@@ -22,6 +22,9 @@
     <th>Bid Price</th>
     <th>Chosen Bid?</th>
     <th>Bought?</th>
+    <th>Paid?</th>
+    <th></th>
+    <th></th>
   </tr>
 <% @bids.each do |bid| %>
   <tr>
@@ -29,6 +32,13 @@
     <td><%= bid.bidding_price %></td>
     <td><%= bid.chosen_bid %></td>
     <td><%= bid.bought %></td>
+    <td><%= bid.payment_made %></td>
+      <% if bid.payment_made == false %>
+    <td><%= link_to "Pay", new_bid_braintree_path(bid) %></td>
+      <% else %>
+      <td></td>
+      <% end %>
+    <td><%= link_to 'Delete Bid', bid_path(bid), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>
   </tr>
 </table>
