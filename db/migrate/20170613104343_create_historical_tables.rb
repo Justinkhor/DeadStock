@@ -1,4 +1,4 @@
-class CreateHistoricalTables < ActiveRecord::Migration[5.0]
+class CreateHistoricalTables < ActiveRecord::Migration
   def change
     create_table :historical_tables do |t|
        t.string :model_number

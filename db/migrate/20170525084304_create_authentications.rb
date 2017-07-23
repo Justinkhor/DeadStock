@@ -1,4 +1,4 @@
-class CreateAuthentications < ActiveRecord::Migration[5.0]
+class CreateAuthentications < ActiveRecord::Migration
   def change
     create_table :authentications do |t|
       t.string :uid

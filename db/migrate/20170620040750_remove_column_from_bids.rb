@@ -1,4 +1,4 @@
-class RemoveColumnFromBids < ActiveRecord::Migration[5.0]
+class RemoveColumnFromBids < ActiveRecord::Migration
   def change
     remove_column :bids, :closing_date
   end

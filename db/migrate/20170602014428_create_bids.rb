@@ -1,4 +1,4 @@
-class CreateBids < ActiveRecord::Migration[5.0]
+class CreateBids < ActiveRecord::Migration
   def change
     create_table :bids do |t|
       t.references :user

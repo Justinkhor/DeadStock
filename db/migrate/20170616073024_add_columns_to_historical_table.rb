@@ -1,4 +1,4 @@
-class AddColumnsToHistoricalTable < ActiveRecord::Migration[5.0]
+class AddColumnsToHistoricalTable < ActiveRecord::Migration
   def change
     add_column :historical_tables, :fx_pair, :string
     add_column :historical_tables, :fx_rate, :decimal

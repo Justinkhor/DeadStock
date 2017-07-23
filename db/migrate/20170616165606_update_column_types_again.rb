@@ -1,4 +1,4 @@
-class UpdateColumnTypesAgain < ActiveRecord::Migration[5.0]
+class UpdateColumnTypesAgain < ActiveRecord::Migration
     def change
       remove_column :stocks, :closing_date
       remove_column :bids, :closing_date

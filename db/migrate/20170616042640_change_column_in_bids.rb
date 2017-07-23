@@ -1,4 +1,4 @@
-class ChangeColumnInBids < ActiveRecord::Migration[5.0]
+class ChangeColumnInBids < ActiveRecord::Migration
   def change
     remove_column :bids, :quantity, :integer
 

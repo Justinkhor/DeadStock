@@ -1,4 +1,4 @@
-class CreateIndexTables < ActiveRecord::Migration[5.0]
+class CreateIndexTables < ActiveRecord::Migration
   def change
     create_table :index_tables do |t|
        t.date :index_date
